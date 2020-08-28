@@ -15,8 +15,26 @@ dependencies {
 }
 
 test {
+    // needed for JUnit 5
     useJUnitPlatform()
+    // this is a useful addition to get information for tests that pass
     testLogging {
         events "passed", "skipped", "failed"
+    }
+}
+
+java {
+    // generate JavaDoc and put into a jar file
+    withJavadocJar()
+    // collect source code into a jar file
+    withSourcesJar()
+}
+
+jar {
+    manifest {
+        // information to put into MANIFEST.MF in the jar file, does not apply to JavaDoc or Sources Jar files
+        attributes('Implementation-Title': project.name,
+                   'Implementation-Version': project.version,
+                   'Implementation-Vendor': 'Geoff Does Stuff')
     }
 }

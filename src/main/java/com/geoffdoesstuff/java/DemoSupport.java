@@ -6,6 +6,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.jar.JarEntry;
@@ -27,7 +28,7 @@ public final class DemoSupport {
 	/**
 	 * Based on the specified Java package name, we get the "resources" for this package from the class loader and then
 	 * seek all the classnames, to return a list of strings.
-	 * @param demoClasspath
+	 * @param demoClasspath package name
 	 * @return all matching class names as a List of Strings, sorted alphabetically
 	 */
 	public static List<String> getDemoClasses(String demoClasspath) {
@@ -67,16 +68,22 @@ public final class DemoSupport {
 	/**
 	 * First we get the Class object for the specified String className. Then we search for and hopefully find the
 	 * "public static void main(String[] args)" method, which we can then just execute.
-	 * @param className
+	 * @param className fully qualified classname
 	 */
 	public static void executeDemoClass(String className) {
 		try {
 			Class<?> theClass = Class.forName(className);
-			System.out.println("Class: " + theClass.getName());
+			String msg = "Class: " + theClass.getName();
+			System.out.println(msg);
+			char[] line = new char[msg.length()];
+			Arrays.fill(line, 0, line.length, '~');
+			System.out.println(line);
 			// the main method is static, so we don't need to instantiate the class and make an object
 			Method main = theClass.getDeclaredMethod("main", String[].class);
 			Object[] params = new Object[1];
 			main.invoke(null, params);
+			System.out.println(line);
+			System.out.println();
 		} catch (NoSuchMethodException | ClassNotFoundException | IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();
 		}

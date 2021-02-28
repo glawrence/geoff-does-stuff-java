@@ -4,7 +4,7 @@ This is a Java project to accompany Geoff Does Stuff. Some things are easier to 
 
 It is worth adding that [JUnit 5](https://junit.org/junit5/) is being used as well as [Gradle Build Tool](https://gradle.org/).
 
-##Executing
+## Executing
 
 I hope to find a better way to do this, but for now, I am using this on macOS:
 

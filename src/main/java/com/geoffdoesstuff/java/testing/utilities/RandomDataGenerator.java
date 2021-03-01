@@ -7,19 +7,28 @@ import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * A utility class to generate random data for use in testing. It is worth noting that java.util.Random is an often
- * used random number generator. Here I have used ThreadLocalRandom, the reason is that ThreadLocalRandom is better
- * in a multi-threaded context. It is worth noting that an instance of Random is thread-safe. However, neither Random
- * nor ThreadLocalRandom are cryptographically secure, if you are needing a random number in a security sensitive
- * context then you should use java.security.SecureRandom.
- *
+ * used random number generator. Here I have used java.util.concurrent.ThreadLocalRandom, the reason is that
+ * ThreadLocalRandom is better in a multi-threaded context. It is worth noting that an instance of Random is
+ * thread-safe. However, neither Random nor ThreadLocalRandom are cryptographically secure, if you are needing a
+ * random number in a security sensitive context then you should use java.security.SecureRandom.
+ * <p>
  * There are three different LocalDate generators, getLocalDate() is the slowest, taking about 5 times as long as
- * getLocalDateAlt(). The getLocalDateAl2() version is slightly quicker than getLocalDateAlt() but the margin is
+ * getLocalDateAlt(). The getLocalDateAlt2() version is slightly quicker than getLocalDateAlt() but the margin is
  * very small. All three LocalDate generators return dates in the range 1970 to 2080, for no reason other than to
  * be similar and useful.
+ * <p>
+ * I have included two String generators so that output can be limited to alpha-numeric if needed, however the
+ * String generators do only work in ASCII.
  */
-public class RandomDataGenerator {
+public final class RandomDataGenerator {
 
 	private final static ThreadLocalRandom random = ThreadLocalRandom.current();
+
+	/**
+	 * The constructor is marked as private as all methods are static.
+	 */
+	private RandomDataGenerator() {
+	}
 
 	/**
 	 * This works by working with the 1st of the month, to work out how many days in the month, after
@@ -118,5 +127,9 @@ public class RandomDataGenerator {
 			sb.append((char) random.nextInt(32, 127));
 		}
 		return sb.toString();
+	}
+
+	public static String getRandomUnicode() {
+		return "";
 	}
 }

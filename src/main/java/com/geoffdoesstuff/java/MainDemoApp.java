@@ -4,7 +4,6 @@ import java.util.*;
 
 public class MainDemoApp {
 
-	public static final String REGEX = "[:!]"; // match : or !
 	private static final String DEMO_CLASSPATH = "com.geoffdoesstuff.java.demo";
 
 	public static void main(String[] args) {

@@ -20,6 +20,20 @@ import java.util.stream.Collectors;
 public final class DemoSupport {
 
 	/**
+	 *   This Regular Expression matches either "file:" at the start of the text or ! anywhere:
+	 *
+	 *   start of section                (
+	 *   match start of text              ^
+	 *   match literal                     file:
+	 *   end of section                         )
+	 *   match part before or the part after     |
+	 *   start of section                         (
+	 *   match literal                             !
+	 *   end of section                             )
+	 */
+	private static final String REGEX = "(^file:)|(!)";
+
+	/**
 	 * Hide the constructor as this is a class of static methods.
 	 */
 	private DemoSupport() {
@@ -47,7 +61,7 @@ public final class DemoSupport {
 						break;
 					case "jar":
 						// classes have been packaged into a JAR file, so we need to parse it
-						classNames.addAll(findClassesInJarFile(resource.getFile().split(MainDemoApp.REGEX)[1], demoClassPathSlash));
+						classNames.addAll(findClassesInJarFile(resource.getFile().split(REGEX)[1], demoClassPathSlash));
 						break;
 					default:
 						// was not expecting to be here, but if we are, output some information

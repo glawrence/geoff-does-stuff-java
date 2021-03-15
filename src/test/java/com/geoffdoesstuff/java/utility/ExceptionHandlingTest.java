@@ -1,68 +1,56 @@
 package com.geoffdoesstuff.java.utility;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import java.util.Arrays;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ExceptionHandlingTest {
-	private ByteArrayOutputStream byteArrayOutputStream;
-	private PrintStream originalStdOut;
-	private PrintStream originalStdErr;
 
-	/**
-	 * Here we capture the normal StdOut and StdErr and redirect both to a ByteArrayStream so that we can query it later.
-	 */
-	@BeforeEach
-	void setup() {
-		byteArrayOutputStream = new ByteArrayOutputStream();
-		originalStdOut = System.out;
-		originalStdErr = System.err;
-		System.setOut(new PrintStream(byteArrayOutputStream));
-		System.setErr(new PrintStream(byteArrayOutputStream));
-	}
-
-	/**
-	 * Put the original StdOut and StdErr back, so other tests are not impacted.
-	 */
-	@AfterEach
-	void tearDown() {
-		System.setOut(originalStdOut);
-		System.setErr(originalStdErr);
+	@Test
+	@DisplayName("Test we get back a String of reasonable size for a stack trace")
+	void testExceptionStackTraceAsString() {
+		String stackTrace = ExceptionHandling.exceptionStackTraceAsString(new NullPointerException("The stack trace NPE..."));
+		assertNotNull(stackTrace);
+		assertTrue(stackTrace.contains("The stack trace NPE..."));
+		assertTrue(stackTrace.length() > 8000); // check there are lots of characters
+		assertTrue(stackTrace.split("[\n]").length > 80); // check there are lots of lines
 	}
 
 	@Test
-	void testGetStackTraceNull() {
-		ExceptionHandling.getStackTrace(null);
-		String outputStr = byteArrayOutputStream.toString();
-		assertTrue(outputStr.contains("The stack trace.."));
-		assertTrue(outputStr.contains(NullPointerException.class.getName()));
+	@DisplayName("Test we get back a String that is equivalent to the first test, and of suitable size")
+	void testExceptionStackTraceAsStringLine() {
+		NullPointerException npe = new NullPointerException("The stack trace NPE...");
+		String stackTraceSingleLine = ExceptionHandling.exceptionStackTraceAsStringLine(npe);
+		String stackTraceMultiLine = ExceptionHandling.exceptionStackTraceAsString(npe);
+		assertNotNull(stackTraceSingleLine);
+		assertNotNull(stackTraceMultiLine);
+		assertEquals(stackTraceMultiLine, stackTraceSingleLine.translateEscapes());
+		assertTrue(stackTraceSingleLine.contains("The stack trace NPE..."));
+		assertTrue(stackTraceSingleLine.length() > 8000); // check there are lots of characters
+		assertTrue(stackTraceSingleLine.split("\\\\n").length > 80); // check there are lots of new line markers
 	}
 
 	@Test
-	void testGetStackTraceNotNull() {
-		ExceptionHandling.getStackTrace("");
-		String outputStr = byteArrayOutputStream.toString();
-		assertFalse(outputStr.contains("The stack trace.."));
-		assertFalse(outputStr.contains(NullPointerException.class.getName()));
+	@DisplayName("Test the Array version works as expected")
+	void testExceptionStackTraceAsStringArray() {
+		String[] stackTrace = ExceptionHandling.exceptionStackTraceAsStringArray(new NullPointerException("The stack trace NPE..."));
+		assertNotNull(stackTrace);
+		assertTrue(stackTrace[0].contains("The stack trace NPE..."));
+		assertTrue(Arrays.stream(stackTrace).mapToInt(String::length).sum() > 8000); // check there are lots of characters
+		assertTrue(stackTrace.length > 80); // check there are lots of lines
 	}
 
 	@Test
-	void testPrintStackTraceNull() {
-		ExceptionHandling.printStackTraceToStdErr(null);
-		String outputStr = byteArrayOutputStream.toString();
-		assertTrue(outputStr.contains(NullPointerException.class.getName()));
-	}
-
-	@Test
-	void testPrintStackTraceNotNull() {
-		ExceptionHandling.printStackTraceToStdErr("");
-		String outputStr = byteArrayOutputStream.toString();
-		assertFalse(outputStr.contains(NullPointerException.class.getName()));
+	@DisplayName("Test the List version works as expected")
+	void testExceptionStackTraceAsStringList() {
+		List<String> stackTrace = ExceptionHandling.exceptionStackTraceAsStringList(new NullPointerException("The stack trace NPE..."));
+		assertNotNull(stackTrace);
+		assertTrue(stackTrace.get(0).contains("The stack trace NPE..."));
+		assertTrue(stackTrace.stream().mapToInt(String::length).sum() > 8000);
+		assertTrue(stackTrace.size() > 80); // check there are lots of lines
 	}
 }

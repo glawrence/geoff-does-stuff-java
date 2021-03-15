@@ -2,14 +2,26 @@ package com.geoffdoesstuff.java;
 
 import java.util.*;
 
+/**
+ * The main demo class.
+ */
 public class MainDemoApp {
 
 	private static final String DEMO_CLASSPATH = "com.geoffdoesstuff.java.demo";
 
+	/**
+	 * This is my main demo app class, that looks for the demo classes and puts them into a menu.
+	 * @param args command line arguments
+	 */
 	public static void main(String[] args) {
 		System.out.println("Welcome....");
 		List<String> classNames = DemoSupport.getDemoClasses(DEMO_CLASSPATH);
-		System.out.println("Demo classes found: " + classNames.size());
+		if (classNames.size() > 0) {
+			System.out.println("Demo classes found: " + classNames.size());
+		} else {
+			System.out.println("No demo classes found");
+			return; // if there are no demo classes we need to avoid showing the menu
+		}
 		Scanner keyboard = new Scanner(System.in);
 		displayMenu(classNames);
 		do {

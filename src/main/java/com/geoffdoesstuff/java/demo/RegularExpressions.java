@@ -32,6 +32,10 @@ public class RegularExpressions {
 	 */
 	public static final String REGULAR_EXPRESSION_2 = "^ID-\\w{3}\\d{2}([a-c]|[X-Z])$";
 
+	/**
+	 * Main method, for independent running or use via Demo Menu
+	 * @param args command line
+	 */
 	public static void main(String[] args) {
 		processRexExMatching("", REGULAR_EXPRESSION_1);
 		processRexExMatching("ID-C12345AB.", REGULAR_EXPRESSION_1);

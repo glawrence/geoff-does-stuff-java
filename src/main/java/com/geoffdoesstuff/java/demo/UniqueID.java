@@ -7,6 +7,11 @@ import java.util.UUID;
  * which are 64-bit.
  */
 public class UniqueID {
+
+	/**
+	 * Main method, for independent running or use via Demo Menu
+	 * @param args command line
+	 */
 	public static void main(String[] args) {
 		UUID uuid = UUID.randomUUID();
 		System.out.println("Random UUID: " + uuid);

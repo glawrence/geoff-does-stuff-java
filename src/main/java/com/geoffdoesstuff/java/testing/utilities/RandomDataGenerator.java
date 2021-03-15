@@ -129,6 +129,10 @@ public final class RandomDataGenerator {
 		return sb.toString();
 	}
 
+	/**
+	 * Not implemented
+	 * @return String
+	 */
 	public static String getRandomUnicode() {
 		return "";
 	}

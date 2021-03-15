@@ -5,14 +5,21 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
+/**
+ * Date and Time demo.
+ */
 public class DatesAndTimes {
 
+	/**
+	 * Main method, for independent running or use via Demo Menu
+	 * @param args command line
+	 */
 	public static void main(String[] args) {
 		DatesAndTimes datesAndTimes = new DatesAndTimes();
 		datesAndTimes.demo();
 	}
 
-	public void demo() {
+	private void demo() {
 		LocalDateTime endOf2020 = LocalDateTime.of(2020, 12, 31, 23, 59, 59);
 		Duration diff = Duration.between(endOf2020, LocalDateTime.now());
 		System.out.println("Duration between end of 2020 and now: " + diff);

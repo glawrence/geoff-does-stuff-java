@@ -3,6 +3,8 @@ This is a Java project to accompany Geoff Does Stuff. Some things are easier to 
 
 It is worth adding that [JUnit 5](https://junit.org/junit5/) is being used as well as [Gradle Build Tool](https://gradle.org/).
 
+This project is primarily hosted on GitLab at [Geoff Lawrence / Geoff Does Stuff - Java](https://gitlab.com/glawrence/geoff-does-stuff-java) but is configured with [Repository Mirroring](https://docs.gitlab.com/ee/user/project/repository/repository_mirroring.html) to automatically mirror the project to [glawrence/geoff-does-stuff-java](https://github.com/glawrence/geoff-does-stuff-java) on GitHub.
+
 ## Executing
 There are differences when working on different platforms, so they are covered separately. I have not tested this on Linux but the macOS instructions should work.
 

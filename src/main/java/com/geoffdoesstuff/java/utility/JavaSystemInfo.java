@@ -53,6 +53,22 @@ public class JavaSystemInfo {
 		return (System.getProperty("java.version", "0.0").compareTo("16") >= 0);
 	}
 
+	/**
+	 * Check if we are on Java 17 or higher, returning true if we are
+	 * @return boolean
+	 */
+	public static boolean isAtLeastJava17() {
+		return (System.getProperty("java.version", "0.0").compareTo("17") >= 0);
+	}
+
+	/**
+	 * Check if we are on Java 18 or higher, returning true if we are
+	 * @return boolean
+	 */
+	public static boolean isAtLeastJava18() {
+		return (System.getProperty("java.version", "0.0").compareTo("18") >= 0);
+	}
+
 	private static String getPropertyOutput(String strProperty) {
 		return strProperty.replaceAll("[.]", " ") + ": " + System.getProperty(strProperty, strProperty + " was not found");
 	}

@@ -17,9 +17,9 @@ public class MainDemoApp {
 		System.out.println("Welcome....");
 		List<String> classNames = DemoSupport.getDemoClasses(DEMO_CLASSPATH);
 		if (classNames.size() > 0) {
-			System.out.println("Demo classes found: " + classNames.size());
+			System.out.printf("Demo classes found in %s: %d%n", DEMO_CLASSPATH, classNames.size());
 		} else {
-			System.out.println("No demo classes found");
+			System.out.printf("No demo classes found in %s", DEMO_CLASSPATH);
 			return; // if there are no demo classes we need to avoid showing the menu
 		}
 		Scanner keyboard = new Scanner(System.in);
@@ -47,7 +47,7 @@ public class MainDemoApp {
 	private static void displayMenu(List<String> classNames) {
 		System.out.println("Options:");
 		for (int i = 0; i < classNames.size(); i++) {
-			System.out.println("  " + Character.toString(65 + i) + ") " + classNames.get(i));
+			System.out.println("  " + Character.toString(65 + i) + ") " + classNames.get(i).replaceAll(DEMO_CLASSPATH + ".", ""));
 		}
 		System.out.println("  ex) exit");
 		System.out.println("Enter command:");

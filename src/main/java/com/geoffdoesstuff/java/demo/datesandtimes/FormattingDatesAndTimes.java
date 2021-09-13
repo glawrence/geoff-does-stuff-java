@@ -9,6 +9,10 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+/*
+    There is documentation on date formatting at https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/time/format/DateTimeFormatter.html
+    which explains what all the letters and standard formats do
+ */
 public class FormattingDatesAndTimes {
     private final LocalDateTime nowLocal;
     private final ZonedDateTime nowZoned;

@@ -79,7 +79,7 @@ public class Optionals {
         System.out.println("Compare b - " + ((one.equals(two)) ? "Match":"Different"));
         System.out.println("--ifPresentDemo()--");
         ifPresentDemo();
-        orElseThrowDemo();
+        orElseDemo();
     }
 
     private static void ifPresentDemo() {
@@ -93,7 +93,7 @@ public class Optionals {
                 () -> System.out.println("Nothing"));
     }
 
-    private static void orElseThrowDemo() {
+    private static void orElseDemo() {
         int loopIterations = 4;
         DemoUtilities.outputTitle("Example of .orElseThrow()", true);
         for (int i = 1; i <= loopIterations; i++) {
@@ -113,6 +113,24 @@ public class Optionals {
                 System.out.println("  It was an empty Optional - " + exception.getMessage());
             }
         }
+        DemoUtilities.outputTitle("Example of .orElse(T other)", true);
+        for (int i = 1; i <= loopIterations; i++) {
+            System.out.println("orElseDemo " + i + " of " + loopIterations);
+            try {
+                orElseShortExample();
+            } catch (MissingResourceException exception) {
+                System.out.println("  It was an empty Optional - " + exception.getMessage());
+            }
+        }
+        DemoUtilities.outputTitle("Example of .orElseGet(Supplier exceptionSupplier)", true);
+        for (int i = 1; i <= loopIterations; i++) {
+            System.out.println("orElseDemo " + i + " of " + loopIterations);
+            try {
+                orElseLongExample();
+            } catch (MissingResourceException exception) {
+                System.out.println("  It was an empty Optional - " + exception.getMessage());
+            }
+        }
     }
 
     private static void orElseThrowShortExample() {
@@ -126,6 +144,21 @@ public class Optionals {
             System.out.println("  Optional is empty");
             return new MissingResourceException("demo", String.class.getName(), "key");
         }));
+    }
+
+    private static void orElseShortExample() {
+        Optional<String> stringOptional = PopulateOptionals.randomlyPopulate("  The Optional String");
+        System.out.println(stringOptional.orElse(getOrElseString())); // the .orElse() method call is always executed, even when not needed
+    }
+
+    private static String getOrElseString() {
+        System.out.println("  ~~ inside getOrElseString");
+        return "  The 'orElse' string";
+    }
+
+    private static void orElseLongExample() {
+        Optional<String> stringOptional = PopulateOptionals.randomlyPopulate("  The Optional String");
+        System.out.println(stringOptional.orElseGet(Optionals::getOrElseString)); // the .orElseGet() is only executed if needed
     }
 
     static private String passengerNameByDestination(List<Passenger> passList, String destination) {

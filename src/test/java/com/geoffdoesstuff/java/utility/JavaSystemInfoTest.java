@@ -20,8 +20,8 @@ class JavaSystemInfoTest {
 		assertTrue(JavaSystemInfo.isAtLeastJava8());
 		assertTrue(JavaSystemInfo.isAtLeastJava11());
 		assertTrue(JavaSystemInfo.isAtLeastJava15());
-		assertFalse(JavaSystemInfo.isAtLeastJava16());
-		assertFalse(JavaSystemInfo.isAtLeastJava17());
+		assertTrue(JavaSystemInfo.isAtLeastJava16());
+		assertTrue(JavaSystemInfo.isAtLeastJava17());
 		assertFalse(JavaSystemInfo.isAtLeastJava18());
 	}
 

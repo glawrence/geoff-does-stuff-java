@@ -10,7 +10,7 @@ repositories {
 }
 
 dependencies {
-    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.7.1'
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.8.1'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine'
 }
 
@@ -24,6 +24,9 @@ test {
 }
 
 java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
     // generate JavaDoc and put into a jar file
     withJavadocJar()
     // collect source code into a jar file

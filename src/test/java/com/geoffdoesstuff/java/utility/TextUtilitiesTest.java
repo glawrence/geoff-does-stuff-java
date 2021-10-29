@@ -9,20 +9,36 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TextUtilitiesTest {
 
-    @DisplayName("Test with null or empty strings")
+    @DisplayName("Test isNullOrEmpty() with null or empty strings")
     @ParameterizedTest
     @NullAndEmptySource
-    @ValueSource(strings = {"  ", " \t\t \n \t"})
     void isNullOrEmpty_True(String text) {
         System.out.printf("Testing with [%s]%n", text);
         assertTrue(TextUtilities.isNullOrEmpty(text));
     }
 
-    @DisplayName("Test with text")
+    @DisplayName("Test isNullOrEmpty() with text")
     @ParameterizedTest
     @ValueSource(strings = {"a", " a ", " \t\t a\n \t"})
     void isNullOrEmpty_False(String text) {
         System.out.printf("Testing with [%s]%n", text);
         assertFalse(TextUtilities.isNullOrEmpty(text));
+    }
+
+    @DisplayName("Test isNullOrBlank() with null or empty strings")
+    @ParameterizedTest
+    @NullAndEmptySource
+    @ValueSource(strings = {"  ", " \t\t \n \t"})
+    void isNullOrBlank_True(String text) {
+        System.out.printf("Testing with [%s]%n", text);
+        assertTrue(TextUtilities.isNullOrBlank(text));
+    }
+
+    @DisplayName("Test isNullOrBlank() with text")
+    @ParameterizedTest
+    @ValueSource(strings = {"a", " a ", " \t\t a\n \t"})
+    void isNullOrBlank_False(String text) {
+        System.out.printf("Testing with [%s]%n", text);
+        assertFalse(TextUtilities.isNullOrBlank(text));
     }
 }

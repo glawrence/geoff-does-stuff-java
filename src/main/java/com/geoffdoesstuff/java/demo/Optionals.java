@@ -5,6 +5,7 @@ import com.geoffdoesstuff.java.demo.optionals.PopulateOptionals;
 import com.geoffdoesstuff.java.utility.DemoUtilities;
 
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * An Optional is either "present" or "absent", where present is non-null, and absent means is empty. However,
@@ -131,13 +132,27 @@ public class Optionals {
                 System.out.println("  It was an empty Optional - " + exception.getMessage());
             }
         }
+        for (int i = 1; i <= loopIterations; i++) {
+            System.out.println("orElseDemo " + i + " of " + loopIterations);
+            try {
+                orElseLongExampleAlt();
+            } catch (MissingResourceException exception) {
+                System.out.println("  It was an empty Optional - " + exception.getMessage());
+            }
+        }
     }
 
+    /**
+     * Might throw java.util.NoSuchElementException if the Optional is empty
+     */
     private static void orElseThrowShortExample() {
         Optional<String> stringOptional = PopulateOptionals.randomlyPopulate("  The Optional String");
         System.out.println(stringOptional.orElseThrow());
     }
 
+    /**
+     * Easy to control which exception is thrown
+     */
     private static void orElseThrowLongExample() {
         Optional<String> stringOptional = PopulateOptionals.randomlyPopulate("  The Optional String");
         System.out.println(stringOptional.orElseThrow(() -> {
@@ -161,7 +176,15 @@ public class Optionals {
         System.out.println(stringOptional.orElseGet(Optionals::getOrElseString)); // the .orElseGet() is only executed if needed
     }
 
-    static private String passengerNameByDestination(List<Passenger> passList, String destination) {
+    private static void orElseLongExampleAlt() {
+        Optional<String> stringOptional = PopulateOptionals.randomlyPopulate("  The Optional String");
+        System.out.println(stringOptional.orElseGet(() -> {
+            System.out.println("Empty....");
+            return "Random number: " + ThreadLocalRandom.current().nextInt(100);
+        })); // the .orElseGet() is only executed if needed
+    }
+
+    private static String passengerNameByDestination(List<Passenger> passList, String destination) {
         return passList.stream()
                 .filter(p -> p.getDestination().equalsIgnoreCase(destination))
                 .findFirst()
@@ -169,7 +192,7 @@ public class Optionals {
                 .orElse("UNKNOWN"); //another call on Optional, chained
     }
 
-    static private List<Passenger> generateSomePassengers() {
+    private static List<Passenger> generateSomePassengers() {
         return Arrays.asList(new Passenger("Anne", "Bath", 23),
                 new Passenger("Bill", "Chester", 68),
                 new Passenger("Charlie", "Derby", 8),

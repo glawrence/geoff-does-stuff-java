@@ -17,7 +17,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * very small. All three LocalDate generators return dates in the range 1970 to 2080, for no reason other than to
  * be similar and useful.
  * <p>
- * I have included two String generators so that output can be limited to alpha-numeric if needed, however the
+ * I have included two String generators so that output can be limited to alphanumeric if needed, however the
  * String generators do only work in ASCII.
  */
 public final class RandomDataGenerator {

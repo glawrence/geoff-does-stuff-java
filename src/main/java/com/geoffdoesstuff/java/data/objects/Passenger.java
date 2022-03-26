@@ -2,8 +2,8 @@ package com.geoffdoesstuff.java.data.objects;
 
 import java.time.LocalDateTime;
 
-/*
-    This is an example data object, and is just used by the demos
+/**
+ * This is an example data object, and is just used by the demos
  */
 public class Passenger {
     private final String name;

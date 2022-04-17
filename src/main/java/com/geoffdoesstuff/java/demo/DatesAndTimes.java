@@ -4,6 +4,8 @@ import com.geoffdoesstuff.java.demo.datesandtimes.FormattingDatesAndTimes;
 import com.geoffdoesstuff.java.utility.DemoUtilities;
 
 import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Date and Time demo.
@@ -22,6 +24,98 @@ public class DatesAndTimes {
 		datesAndTimes.dateTimeCalculations();
 		DemoUtilities.outputTitle("Formatting Demo");
 		datesAndTimes.formatNow();
+		DemoUtilities.outputTitle("Copied Formatting Demo", true);
+		datesAndTimes.formattingExtra();
+		DemoUtilities.outputTitle("Unix Timestamps");
+		datesAndTimes.unixTimestamps();
+		DemoUtilities.outputTitle("Comparison");
+		datesAndTimes.dateComparisons();
+		DemoUtilities.outputTitle("Durations");
+		datesAndTimes.durationDemo();
+		DemoUtilities.outputTitle("Parsing");
+		datesAndTimes.parsingDemo();
+	}
+
+	private void parsingDemo() {
+		String input = "2021-12-21";
+		System.out.printf("Parsing %s into LocalDate gives %s%n", input, parseLocalDate(input));
+		input = "2021-13-A";
+		System.out.printf("Parsing %s into LocalDate gives %s%n", input, parseLocalDate(input));
+		boolean result = isValidLocalDate(null);
+		System.out.println(result);
+	}
+
+	private LocalDate parseLocalDate(String input) {
+		try {
+			return LocalDate.parse(input);
+		} catch (DateTimeParseException dtpe) {
+			System.out.printf("Error parsing '%s' to LocalDate with message \"%s\"%n", dtpe.getParsedString(), dtpe.getMessage());
+			return null;
+		}
+	}
+
+	private boolean isValidLocalDate(String input) {
+		try {
+			LocalDate.parse(input);
+			return true;
+		} catch (DateTimeParseException | NullPointerException e) {
+			return false;
+		}
+	}
+
+	private void durationDemo() {
+		Duration duration = Duration.ZERO;
+		System.out.println("Duration, ZERO: " + duration);
+		duration = Duration.ofSeconds(10);
+		System.out.println("Duration, 10 seconds: " + duration);
+		duration = Duration.ofMillis(10);
+		System.out.println("Duration, 10 milliseconds: " + duration);
+		duration = Duration.ofMinutes(10);
+		System.out.println("Duration, 10 minutes: " + duration);
+	}
+
+	private void dateComparisons() {
+		LocalDate today = LocalDate.now();
+		LocalDate laterToday = LocalDate.now();
+		LocalDate yesterday = LocalDate.now().minusDays(1);
+		LocalDate tomorrow = LocalDate.now().plusDays(1);
+		System.out.println("Compare " + today.isAfter(laterToday));
+		System.out.println("Compare " + today.isBefore(laterToday));
+		System.out.println("Compare " + today.isEqual(laterToday));
+		DemoUtilities.outputTitle("afterOrEqual", true);
+		System.out.println("After or Equal " + afterOrEqual(today, laterToday) + String.format(", from %s to %s", today, laterToday));
+		System.out.println("After or Equal " + afterOrEqual(today, yesterday) + String.format(", from %s to %s", today, yesterday));
+		System.out.println("After or Equal " + afterOrEqual(today, tomorrow) + String.format(", from %s to %s", today, tomorrow));
+		DemoUtilities.outputTitle("before", true);
+		System.out.println("After or Equal " + before(today, laterToday) + String.format(", from %s to %s", today, laterToday));
+		System.out.println("After or Equal " + before(today, yesterday) + String.format(", from %s to %s", today, yesterday));
+		System.out.println("After or Equal " + before(today, tomorrow) + String.format(", from %s to %s", today, tomorrow));
+		DemoUtilities.outputTitle("beforeAlt", true);
+		System.out.println("After or Equal " + beforeAlt(today, laterToday) + String.format(", from %s to %s", today, laterToday));
+		System.out.println("After or Equal " + beforeAlt(today, yesterday) + String.format(", from %s to %s", today, yesterday));
+		System.out.println("After or Equal " + beforeAlt(today, tomorrow) + String.format(", from %s to %s", today, tomorrow));
+	}
+
+	private boolean afterOrEqual(LocalDate fromDate, LocalDate toDate) {
+		return (toDate.isAfter(fromDate) || toDate.isEqual(fromDate));
+	}
+
+	private boolean before(LocalDate fromDate, LocalDate toDate) {
+		return !(toDate.isAfter(fromDate) || toDate.isEqual(fromDate));
+	}
+
+	private boolean beforeAlt(LocalDate fromDate, LocalDate toDate) {
+		return (fromDate.isBefore(toDate));
+	}
+
+	private void unixTimestamps() {
+		LocalDateTime current = LocalDateTime.now();
+		ZonedDateTime currentZnd = ZonedDateTime.now();
+		Instant currentInst = currentZnd.toInstant();
+		System.out.println("Second: " + currentInst.getEpochSecond());
+		System.out.println("Milli: " + currentInst.toEpochMilli());
+		System.out.println("Nano: " + currentInst.getNano());
+		System.out.println("Instant Now: " + Instant.now().toString());
 	}
 
 	private void dateTimeCalculations() {
@@ -49,5 +143,33 @@ public class DatesAndTimes {
 		FormattingDatesAndTimes formattingDatesAndTimes = new FormattingDatesAndTimes();
 		formattingDatesAndTimes.formattingDemo();
 		formattingDatesAndTimes.outputDateTime();
+	}
+
+	private void formattingExtra() {
+		System.out.println(getCurrentDateTime(""));
+		System.out.println(getCurrentDateTime("E MMM d HH:mm:ss yyyy O"));
+		System.out.println(getCurrentDateTime("E MMM d HH:mm:ss yyyy z zzzz"));
+		System.out.println(getCurrentDateTime("'The' DD 'day is' dd/MM/YYYY HH:mm:ss"));
+		System.out.println(getCurrentDateTime(DateTimeFormatter.RFC_1123_DATE_TIME));
+		System.out.println(getCurrentDateTime(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+		System.out.println(getCurrentDateTime(DateTimeFormatter.ISO_ZONED_DATE_TIME));
+	}
+
+	private static String getCurrentDateTime(DateTimeFormatter dateTimeFormatter) {
+		System.out.println(dateTimeFormatter.toFormat());
+		String result = ZonedDateTime.now().format(dateTimeFormatter);
+		result += System.lineSeparator();
+		ZonedDateTime utc;
+		utc = ZonedDateTime.now(ZoneId.of("UTC"));
+		result += " (UTC) " + utc.format(dateTimeFormatter);
+		return result;
+	}
+
+	private static String getCurrentDateTime(String format) {
+		if (format.equals("")) {
+			// this closely matches ctime from Python
+			format = "E MMM d HH:mm:ss yyyy";
+		}
+		return getCurrentDateTime(DateTimeFormatter.ofPattern(format));
 	}
 }

@@ -130,13 +130,17 @@ public class DatesAndTimes {
 
 	private void generalDemo() {
 		Instant now = Instant.now();
-		System.out.println("Instant.now() - " + now);
+		System.out.println("Instant.now()              : " + now);
 		LocalDateTime gjl = LocalDateTime.ofInstant(now, ZoneId.systemDefault());
-		System.out.println("Now in current timezone: " + gjl);
+		System.out.println("Now in current timezone    : " + gjl);
 		gjl = LocalDateTime.ofInstant(now, ZoneId.of("CET"));
-		System.out.println("Now in Europe (CET)    : " + gjl);
+		System.out.println("Now in Europe (CET)        : " + gjl);
 		gjl = LocalDateTime.ofInstant(now, ZoneId.of("Asia/Kolkata"));
-		System.out.println("Now in India (IST)     : " + gjl);
+		System.out.println("Now in India (IST)         : " + gjl);
+		gjl = LocalDateTime.ofInstant(now, ZoneId.of("Australia/Canberra"));
+		System.out.println("Now in Canberra, Australia : " + gjl);
+		gjl = LocalDateTime.ofInstant(now, ZoneId.of("America/New_York"));
+		System.out.println("Now in New York, USA       : " + gjl);
 	}
 
 	private void formatNow() {

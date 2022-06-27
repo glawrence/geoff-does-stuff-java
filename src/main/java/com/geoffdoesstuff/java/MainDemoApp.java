@@ -15,7 +15,7 @@ public class MainDemoApp {
 	 */
 	public static void main(String[] args) {
 		System.out.println("Welcome....");
-		List<String> classNames = DemoSupport.getDemoClasses(DEMO_CLASSPATH);
+		List<String> classNames = DemoSupport.getDemoClasses(DEMO_CLASSPATH, true);
 		if (classNames.size() > 0) {
 			System.out.printf("Demo classes found in %s: %d%n", DEMO_CLASSPATH, classNames.size());
 		} else {

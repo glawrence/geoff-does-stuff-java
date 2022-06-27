@@ -1,5 +1,7 @@
 package com.geoffdoesstuff.java;
 
+import com.geoffdoesstuff.java.utility.TextUtilities;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -45,7 +47,7 @@ public final class DemoSupport {
 	 * @param demoClasspath package name
 	 * @return all matching class names as a List of Strings, sorted alphabetically
 	 */
-	public static List<String> getDemoClasses(String demoClasspath) {
+	public static List<String> getDemoClasses(String demoClasspath, boolean excludeSubPackages) {
 		final String demoClassPathSlash = demoClasspath.replace('.', '/');
 
 		List<String> classNames = new ArrayList<>();
@@ -57,11 +59,11 @@ public final class DemoSupport {
 				switch (resource.getProtocol()) {
 					case "file":
 						// classes are being loaded from .class files on the file system
-						classNames.addAll(findClassesInDirectory(resource.getFile(), demoClasspath));
+						classNames.addAll(findClassesInDirectory(resource.getFile(), demoClasspath, excludeSubPackages));
 						break;
 					case "jar":
 						// classes have been packaged into a JAR file, so we need to parse it
-						classNames.addAll(findClassesInJarFile(resource.getFile().split(REGEX)[1], demoClassPathSlash));
+						classNames.addAll(findClassesInJarFile(resource.getFile().split(REGEX)[1], demoClassPathSlash, excludeSubPackages));
 						break;
 					default:
 						// was not expecting to be here, but if we are, output some information
@@ -89,8 +91,7 @@ public final class DemoSupport {
 			Class<?> theClass = Class.forName(className);
 			String msg = "Class: " + theClass.getName();
 			System.out.println(msg);
-			char[] line = new char[msg.length()];
-			Arrays.fill(line, 0, line.length, '~');
+			String line = TextUtilities.convertToRepeatedCharacter(msg, '~');
 			System.out.println(line);
 			// the main method is static, so we don't need to instantiate the class and make an object
 			Method main = theClass.getDeclaredMethod("main", String[].class);
@@ -103,7 +104,7 @@ public final class DemoSupport {
 		}
 	}
 
-	private static List<String> findClassesInDirectory(String dirName, String packageName) {
+	private static List<String> findClassesInDirectory(String dirName, String packageName, boolean excludeSubPackages) {
 		List<String> classes = new ArrayList<>();
 		File directory = new File(dirName);
 		if (!directory.exists()) {
@@ -116,7 +117,9 @@ public final class DemoSupport {
 		for (File file : files) {
 			if (file.isDirectory()) {
 				// this is a recursive call
-				classes.addAll(findClassesInDirectory(file.getName(), packageName + "." + file.getName()));
+				if (!excludeSubPackages) {
+					classes.addAll(findClassesInDirectory(dirName + "/" + file.getName(), packageName + "." + file.getName(), false));
+				}
 			} else if (file.getName().endsWith(".class") && !file.getName().contains("$")) {
 				// here we have a class file but without a $ in the name, which usually indicates an inner class
 				classes.add(packageName + "." + file.getName().substring(0, file.getName().length() - 6));
@@ -125,7 +128,7 @@ public final class DemoSupport {
 		return classes;
 	}
 
-	private static List<String> findClassesInJarFile(String jarName, String packageName) {
+	private static List<String> findClassesInJarFile(String jarName, String packageName, boolean excludeSubPackages) {
 		List<String> classes = new ArrayList<>();
 		try {
 			JarFile jar = new JarFile(jarName);
@@ -136,9 +139,18 @@ public final class DemoSupport {
 					String className = jarEntry.getName();
 					if (className.startsWith(packageName)) {
 						if (!className.contains("$")) {
-							className = className.substring(0, className.length() - 6); //remove ".class" from the end
-							className = className.replace('/', '.'); //change / characters to .
-							classes.add(className);
+							boolean addClass = true;
+							if (excludeSubPackages) {
+								String temp = className.substring(packageName.length() + 1);
+								if (temp.contains("/")) {
+									addClass = false;
+								}
+							}
+							if (addClass) {
+								className = className.substring(0, className.length() - 6); //remove ".class" from the end
+								className = className.replace('/', '.'); //change / characters to .
+								classes.add(className);
+							}
 						}
 					}
 				}

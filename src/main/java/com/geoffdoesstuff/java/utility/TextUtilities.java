@@ -10,8 +10,8 @@ public class TextUtilities {
     private static final String REGEX_ANY_CHARACTER = ".";
 
     /**
-     * Utility method to help test for something that is either null, empty. A string with whitespace in is
-     * not empty.
+     * Utility method to help test for something that is either null or empty. A string with whitespace in is
+     * not empty. See also isNullOrBlank()
      * @param text input String object
      * @return boolean
      */
@@ -20,7 +20,7 @@ public class TextUtilities {
     }
 
     /**
-     * Utility method to help test for something that is either null, empty or pure whitespace.
+     * Utility method to help test for something that is either null, empty or pure whitespace. See also isNullOrEmpty.
      * @param text input String object
      * @return boolean
      */

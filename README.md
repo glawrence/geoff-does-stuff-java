@@ -26,8 +26,8 @@ I have been using these as two separate commands on Windows, so starting with
 
 Followed by
 
-`java -jar ./build/libs/geoff-does-stuff-java-1.0-SNAPSHOT.jar`
+`java -jar .\build\libs\geoff-does-stuff-java-1.0-SNAPSHOT.jar`
 
 However, if Java is not on the path then this works if JAVA_HOME is set:
 
-`%JAVA_HOME%\bin\java -jar ./build/libs/geoff-does-stuff-java-1.0-SNAPSHOT.jar`
+`%JAVA_HOME%\bin\java -jar .\build\libs\geoff-does-stuff-java-1.0-SNAPSHOT.jar`

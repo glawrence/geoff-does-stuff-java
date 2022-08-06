@@ -26,8 +26,8 @@ import java.util.concurrent.ThreadLocalRandom;
  * Rule 7 - avoid identity-sensitive operations on Optionals (serialization) [Note: identity sensitive operations include ==
  *          and != for example]
  *
- * See: https://www.youtube.com/watch?v=Ej0sss6cq14 (Stuart Marks' talk)
- *      https://blog.joda.org/2015/08/java-se-8-optional-pragmatic-approach.html
+ * See: <a href="https://www.youtube.com/watch?v=Ej0sss6cq14">Optional - The Mother of All Bikesheds by Stuart Marks</a>
+ *      <a href="https://blog.joda.org/2015/08/java-se-8-optional-pragmatic-approach.html">Stephen Colebourne's blog: Java SE 8 Optional, a pragmatic approach</a>
  */
 public class Optionals {
 
@@ -42,8 +42,6 @@ public class Optionals {
         number = Optional.empty();
         integer = number.orElse(7);
         System.out.println("Value of optional, but if empty, the orElse(7) value: " + integer);
-//     integer = number.orElseThrow(IllegalStateException::new); // uncomment this line and an exception will be thrown
-//     number.map(System.out::println);
 
         // demo of Optional.map()
         System.out.println("Anyone for Bath? " + passengerNameByDestination(generateSomePassengers(), "Bath"));
@@ -105,6 +103,26 @@ public class Optionals {
                 System.out.println("  It was an empty Optional - " + exception.getMessage());
             }
         }
+        DemoUtilities.outputTitle("Example of .orElseThrow(CustomNoArgException::new)", true);
+        for (int i = 1; i <= loopIterations; i++) {
+            System.out.println("orElseThrowDemo " + i + " of " + loopIterations);
+            try {
+                orElseThrowShortExample_AnyException();
+            } catch (NullPointerException exception) {
+                System.out.println("  It was an empty Optional - " + exception.getMessage());
+            }
+        }
+        DemoUtilities.outputTitle("Example of .orElseThrow(() -> new CustomArgsException(arg1, arg2))", true);
+        for (int i = 1; i <= loopIterations; i++) {
+            System.out.println("orElseThrowDemo " + i + " of " + loopIterations);
+            try {
+                orElseThrowShortExample_AnyException_Alt();
+            } catch (MissingResourceException exception) {
+                System.out.println("  It was an empty Optional - " + exception.getMessage() +
+                        ", with classname " + exception.getClassName() +
+                        ", with key " + exception.getKey());
+            }
+        }
         DemoUtilities.outputTitle("Example of .orElseThrow(Supplier exceptionSupplier)", true);
         for (int i = 1; i <= loopIterations; i++) {
             System.out.println("orElseThrowDemo " + i + " of " + loopIterations);
@@ -148,6 +166,22 @@ public class Optionals {
     private static void orElseThrowShortExample() {
         Optional<String> stringOptional = PopulateOptionals.randomlyPopulate("  The Optional String");
         System.out.println(stringOptional.orElseThrow());
+    }
+
+    /**
+     * Might throw NullPointerException, or any exception with a constructor with no arguments
+     */
+    private static void orElseThrowShortExample_AnyException() {
+        Optional<String> stringOptional = PopulateOptionals.randomlyPopulate("  The Optional String");
+        System.out.println(stringOptional.orElseThrow(NullPointerException::new)); // only works if exception has parameterless constructor
+    }
+
+    /**
+     * Might throw any exception, but allows arguments to be specified
+     */
+    private static void orElseThrowShortExample_AnyException_Alt() {
+        Optional<String> stringOptional = PopulateOptionals.randomlyPopulate("  The Optional String");
+        System.out.println(stringOptional.orElseThrow(() -> new MissingResourceException("Missing resource message", "classname_value", "key_value")));
     }
 
     /**

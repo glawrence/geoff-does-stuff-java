@@ -8,7 +8,7 @@ This project is primarily hosted on GitLab at [Geoff Lawrence / Geoff Does Stuff
 ## Executing
 There are differences when working on different platforms, so they are covered separately. I have not tested this on Linux but the macOS instructions should work.
 
-The first, and common step, is to change into the project directory on your local device.
+The first and common step, is to change into the project directory on your local device.
 
 ### macOS
 I hope to find a better way to do this, but for now, I am using this single command on macOS:
@@ -19,6 +19,10 @@ After settings 'Main-Class' in the build.gradle file, inside jar/manifest/attrib
 
 `./gradlew build && java -jar ./build/libs/geoff-does-stuff-java-1.0-SNAPSHOT.jar`
 
+Alternatively to run a specific demo you can use the following:
+
+`java -cp ./build/libs/geoff-does-stuff-java-1.0-SNAPSHOT.jar com.geoffdoesstuff.java.demo.Optionals`
+
 ### Windows
 I have been using these as two separate commands on Windows, so starting with
 
@@ -27,6 +31,10 @@ I have been using these as two separate commands on Windows, so starting with
 Followed by
 
 `java -jar .\build\libs\geoff-does-stuff-java-1.0-SNAPSHOT.jar`
+
+This will run the Demo App and display a menu, alternatively you can run a specific demo direct, as follows: 
+
+`java -cp .\build\libs\geoff-does-stuff-java-1.0-SNAPSHOT.jar com.geoffdoesstuff.java.demo.Optionals`
 
 However, if Java is not on the path then this works if JAVA_HOME is set:
 

@@ -34,6 +34,7 @@ public class Optionals {
     /**
      * Main method, for independent running or use via Demo Menu
      * @param args command line
+     * @see com.geoffdoesstuff.java.MainDemoApp
      */
     public static void main(String[] args) {
         Optional<Integer> number = Optional.of(5); // could have used OptionalInt

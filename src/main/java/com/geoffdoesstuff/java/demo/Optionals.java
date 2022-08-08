@@ -16,23 +16,23 @@ import java.util.concurrent.ThreadLocalRandom;
  * With Optional, the get() method is a trap, a magnet for misuse, remember it throws an exception if it is empty
  * Remember Optional is a box, a 16 byte object
  *
- * The following rules are courtesy of Stuart Marks in his Devoxx talk on Optional in 2016
- * Rule 1 - never assign null to something of type Optional
- * Rule 2 - never call Optional.get() unless you have proved it is not absent
- * Rule 3 - use alternatives to Optional.isPresent() followed by Optional.get()
- * Rule 4 - generally bad to create an Optional just to method chain a value out of it
- * Rule 5 - if an Optional chain is nested, or you have an Optional of Optional, it is probably too complex
- * Rule 6 - avoid Optional in fields, method parameters and collections
- * Rule 7 - avoid identity-sensitive operations on Optionals (serialization) [Note: identity sensitive operations include ==
- *          and != for example]
- *
- * See: <a href="https://www.youtube.com/watch?v=Ej0sss6cq14">Optional - The Mother of All Bikesheds by Stuart Marks</a>
- *      <a href="https://blog.joda.org/2015/08/java-se-8-optional-pragmatic-approach.html">Stephen Colebourne's blog: Java SE 8 Optional, a pragmatic approach</a>
+ The following rules are courtesy of Stuart Marks in his Devoxx talk on Optional in 2016:
+ <ul>
+   <li>Rule 1 - never assign null to something of type Optional</li>
+   <li>Rule 2 - never call Optional.get() unless you have proved it is not absent</li>
+   <li>Rule 3 - use alternatives to Optional.isPresent() followed by Optional.get()</li>
+   <li>Rule 4 - generally bad to create an Optional just to method chain a value out of it</li>
+   <li>Rule 5 - if an Optional chain is nested, or you have an Optional of Optional, it is probably too complex</li>
+   <li>Rule 6 - avoid Optional in fields, method parameters and collections</li>
+   <li>Rule 7 - avoid identity-sensitive operations on Optionals (serialization) [Note: identity sensitive operations include == and != for example]</li>
+ </ul>
+ See: <a href="https://www.youtube.com/watch?v=Ej0sss6cq14">Optional - The Mother of All Bikesheds by Stuart Marks</a><br>
+      <a href="https://blog.joda.org/2015/08/java-se-8-optional-pragmatic-approach.html">Stephen Colebourne's blog: Java SE 8 Optional, a pragmatic approach</a>
  */
 public class Optionals {
 
     /**
-     * Main method, for independent running or use via Demo Menu
+     * Main method, for independent running or use via MainDemoApp menu
      * @param args command line
      * @see com.geoffdoesstuff.java.MainDemoApp
      */
@@ -93,6 +93,9 @@ public class Optionals {
                 () -> System.out.println("Nothing"));
     }
 
+    /**
+     * Demonstrate the various "orElse" methods on the Optional class.
+     */
     private static void orElseDemo() {
         int loopIterations = 4;
         DemoUtilities.outputTitle("Example of .orElseThrow()", true);

@@ -39,3 +39,17 @@ This will run the Demo App and display a menu, alternatively you can run a speci
 However, if Java is not on the path then this works if JAVA_HOME is set:
 
 `%JAVA_HOME%\bin\java -jar .\build\libs\geoff-does-stuff-java-1.0-SNAPSHOT.jar`
+
+## Reading JavaDoc
+When working on the JavaDoc you don't need to do a complete build by running everything including the unit tests. Here are some instructions for building the JavaDoc and then viewing it in the default browser.
+
+### Windows
+
+```
+gradlew javadoc
+start .\build\docs\javadoc\index.html
+```
+
+### macOS
+
+`./gradlew javadoc && open ./build/docs/javadoc/index.html`

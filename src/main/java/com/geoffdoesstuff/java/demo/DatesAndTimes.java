@@ -63,6 +63,14 @@ public class DatesAndTimes {
 		}
 	}
 
+	/**
+	 *   1,000 nanoseconds = 1 microsecond
+	 *   1,000 microseconds = 1 millisecond
+	 *   1,000 milliseconds = 1 second
+	 *   1 second = 1,000 milliseconds
+	 *   1 second = 1,000,000 microseconds
+	 *   1 second = 1,000,000,000 nanoseconds
+	 */
 	private void durationDemo() {
 		Duration duration = Duration.ZERO;
 		System.out.println("Duration, ZERO: " + duration);
@@ -72,6 +80,20 @@ public class DatesAndTimes {
 		System.out.println("Duration, 10 milliseconds: " + duration);
 		duration = Duration.ofMinutes(10);
 		System.out.println("Duration, 10 minutes: " + duration);
+		duration = Duration.ofSeconds(1);
+		System.out.println("Duration, 1 second: " + duration);
+		duration = Duration.ofMillis(1000);
+		System.out.println("Duration, 1 second: " + duration);
+		duration = Duration.ofNanos(1_000_000_000);
+		System.out.println("Duration, 1 second: " + duration);
+		duration = Duration.ofMillis(1);
+		System.out.println("Duration, 1 millisecond: " + duration);
+		duration = Duration.ofNanos(1_000_000);
+		System.out.println("Duration, 1 millisecond: " + duration);
+		duration = Duration.ofNanos(1_000);
+		System.out.println("Duration, 1 microsecond: " + duration);
+		duration = Duration.ofNanos(1);
+		System.out.println("Duration, 1 nanosecond : " + duration);
 	}
 
 	private void dateComparisons() {

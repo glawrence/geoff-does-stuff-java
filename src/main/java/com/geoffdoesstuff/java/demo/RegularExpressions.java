@@ -9,24 +9,28 @@ import java.util.List;
  * My personal view is that I do not like using Regular Expressions as they are hard to read. If they are documented
  * in a similar way to my examples below then they can be easier to understand and hence potentially useful, and I
  * have done just this.
+ * <br>
+ * My recommendation is to have a summary of what it does as a JavaDoc comment and then a regular comment block before
+ * the definition. That way the generated JavaDoc contains a helpful overview but the detail is only in the source code.
  */
 public class RegularExpressions {
 
     /**
-     *   Regular expressions are complicated, and not easy to understand, especially with more advanced uses. This
-     *   is a reasonably simple example that I have tried to document clearly what each element is doing.
-     *
-     *   match the start of the string                 ^
-     *   match simple literal text                      ID-
-     *   match only one of A, B or C                       [ABC]
-     *   is actually \d{5} and means match 5 digits             \\d{5}
-     *   match two characters, either an upper case
-     *   letter or digit                                              [A-Z0-9]{2}
-     *   match the end of the string                                             $
+     * Regular expressions are complicated, and not easy to understand, especially with more advanced uses. This
+     * is a reasonably simple example that I have tried to document clearly what each element is doing.
+     */
+    /*
+     * match the start of the string                   ^
+     * match simple literal text                        ID-
+     * match only one of A, B or C                         [ABC]
+     * is actually \d{5} and means match 5 digits               \\d{5}
+     * match two characters, either an upper case
+     * letter or digit                                                [A-Z0-9]{2}
+     * match the end of the string                                               $
      */
     public static final String REGULAR_EXPRESSION_1 = "^ID-[ABC]\\d{5}[A-Z0-9]{2}$";
 
-    /*
+    /**
      *   match the start of the string                 ^
      *   match simple literal text                      ID-
      *   match three letters, numbers or underscores       \\w{3}
@@ -40,6 +44,12 @@ public class RegularExpressions {
      */
     public static final String REGULAR_EXPRESSION_2 = "^ID-\\w{3}\\d{2}([a-c]|[X-Z])$";
 
+    /**
+         ^        - match the start of the string
+          [A-Z]   - match any uppercase character
+               *  - match zero or more of the preceding element, in this case [A-Z]
+                $ - match against the end of the string
+     */
     public static final String REGULAR_EXPRESSION_3 =
         /*
              ^        - match the start of the string
@@ -49,6 +59,12 @@ public class RegularExpressions {
          */
             "^[A-Z]*$";
 
+    /**
+         ^        - match the start of the string
+          [A-Z]   - match any uppercase character
+               +  - match one or more of the preceding element, in this case [A-Z]
+                $ - match against the end of the string
+     */
     public static final String REGULAR_EXPRESSION_4 =
         /*
              ^        - match the start of the string

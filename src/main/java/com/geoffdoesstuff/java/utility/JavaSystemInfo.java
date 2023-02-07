@@ -1,6 +1,7 @@
 package com.geoffdoesstuff.java.utility;
 
 /**
+ * Java System Info support class
  * @author Geoff Lawrence
  */
 public class JavaSystemInfo {
@@ -67,6 +68,18 @@ public class JavaSystemInfo {
 	 */
 	public static boolean isAtLeastJava18() {
 		return (System.getProperty("java.version", "0.0").compareTo("18") >= 0);
+	}
+
+	/**
+	 * Output the Java Version demo
+	 */
+	public static void javaVersionDemo() {
+		Runtime.Version runtimeVersion = Runtime.version();
+		System.out.println(runtimeVersion);
+		System.out.println("Major Version: " + Runtime.version().version().get(0));
+        System.out.println("Minor Version: " + ((runtimeVersion.version().size() > 1) ? runtimeVersion.version().get(1) : 0));
+        System.out.println("Security Version: " + ((runtimeVersion.version().size() > 2) ? runtimeVersion.version().get(2) : 0));
+		System.out.println("Build Version: " + Runtime.version().build().orElse(0));
 	}
 
 	private static String getPropertyOutput(String strProperty) {

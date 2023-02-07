@@ -45,6 +45,7 @@ public final class DemoSupport {
 	 * Based on the specified Java package name, we get the "resources" for this package from the class loader and then
 	 * seek all the classnames, to return a list of strings.
 	 * @param demoClasspath package name
+	 * @param excludeSubPackages enable/disable inclusion of sub-packages
 	 * @return all matching class names as a List of Strings, sorted alphabetically
 	 */
 	public static List<String> getDemoClasses(String demoClasspath, boolean excludeSubPackages) {

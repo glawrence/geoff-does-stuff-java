@@ -18,13 +18,16 @@ public class FormattingDatesAndTimes {
     private final ZonedDateTime nowZoned;
     private final ZonedDateTime nowUTC;
 
+    /**
+     * Initiate class with current time.
+     */
     public FormattingDatesAndTimes() {
         nowZoned = ZonedDateTime.now();
         nowLocal = nowZoned.toLocalDateTime();
         nowUTC = nowZoned.withZoneSameInstant(ZoneId.of("UTC"));
     }
 
-    /*
+    /**
         Get the current UTC time and then show formatted output, in one of two ways
      */
     public void formattingDemo() {
@@ -33,6 +36,9 @@ public class FormattingDatesAndTimes {
         System.out.println(currentUTC.format(DateTimeFormatter.ISO_DATE_TIME));
     }
 
+    /**
+     * Demonstrate date and time formatting, with different options
+     */
     public void outputDateTime() {
         DemoUtilities.outputTitle("ISO_DATE_TIME", true);
         outputDateTime(DateTimeFormatter.ISO_DATE_TIME);
@@ -49,7 +55,7 @@ public class FormattingDatesAndTimes {
         });
     }
 
-    public void outputDateTime(DateTimeFormatter formatter) {
+    private void outputDateTime(DateTimeFormatter formatter) {
         try {
             System.out.println(nowLocal.format(formatter));
         } catch (DateTimeException dte) {
@@ -61,7 +67,7 @@ public class FormattingDatesAndTimes {
         System.out.println(nowUTC.format(formatter));
     }
 
-    public void outputDateTime(String pattern) {
+    private void outputDateTime(String pattern) {
         outputDateTime(DateTimeFormatter.ofPattern(pattern));
     }
 }

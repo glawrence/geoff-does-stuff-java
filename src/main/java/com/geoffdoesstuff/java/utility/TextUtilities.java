@@ -31,6 +31,7 @@ public class TextUtilities {
     /**
      * Convert the input String to be all the same outputChar character. The only validation is null checking.
      * @param input input string to convert
+     * @param outputChar single character string
      * @return String
      */
     public static String convertToRepeatedCharacter(String input, Character outputChar) {

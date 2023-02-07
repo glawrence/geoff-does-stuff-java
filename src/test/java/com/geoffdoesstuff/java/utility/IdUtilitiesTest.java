@@ -1,0 +1,40 @@
+package com.geoffdoesstuff.java.utility;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.UUID;
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class IdUtilitiesTest {
+
+    @DisplayName("Test isValidUuidText() and isValidUuidObject(), success scenarios")
+    @Test
+    void isValidUuid_Success() {
+        Stream<String> uuidStream
+                = Stream.of("1e36d659-5388-4005-a3a3-f67dfb60b1d4",
+                UUID.randomUUID().toString(),
+                UUID.randomUUID().toString(),
+                UUID.randomUUID().toString(),
+                UUID.randomUUID().toString(),
+                UUID.randomUUID().toString());
+        uuidStream.forEach(uuid -> {
+            assertTrue(IdUtilities.isValidUuidObject(uuid));
+            assertTrue(IdUtilities.isValidUuidText(uuid));
+        });
+    }
+
+    @DisplayName("Test isValidUuidText() and isValidUuidObject(), failure scenarios")
+    @ParameterizedTest
+    @NullAndEmptySource
+    @ValueSource(strings = {"hello world", "1e36d659-5388-4005-a3a3-f67dfb60b1d"})
+    void isValidUuid_Fail(String id) {
+        assertFalse(IdUtilities.isValidUuidObject(id));
+        assertFalse(IdUtilities.isValidUuidText(id));
+    }
+}

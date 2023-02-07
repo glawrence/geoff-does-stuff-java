@@ -1,5 +1,8 @@
 package com.geoffdoesstuff.java.demo;
 
+import com.geoffdoesstuff.java.utility.IdUtilities;
+
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -27,5 +30,20 @@ public class UniqueID {
 		System.out.println("Generated UUID: " + uuid);
 		System.out.println(String.format("  Most Significant Bits: %d Least Significant Bits: %d", uuid.getMostSignificantBits(), uuid.getLeastSignificantBits()));
 		System.out.println(String.format("  Version: %d Variant: %d", uuid.version(), uuid.variant()));
+
+		uuid = UUID.randomUUID();
+		String id = uuid.toString();
+		System.out.println(UUID.fromString(id).compareTo(uuid));
+
+		List<String> uuids = List.of("", "gsgsdgggs", "1e36d659-5388-4005-a3a3-f67dfb60b1d4", id);
+		uuids.forEach(value -> {
+			System.out.println("Testing " + value);
+			System.out.printf("  Is %s a valid UUID? %b%n", value, IdUtilities.isValidUuidText(value));
+			System.out.printf("  Is %s a valid UUID? %b%n", value, IdUtilities.isValidUuidObject(value));
+		});
+		id = null;
+		System.out.println("Testing " + id);
+		System.out.printf("  Is %s a valid UUID? %b%n", id, IdUtilities.isValidUuidText(id));
+		System.out.printf("  Is %s a valid UUID? %b%n", id, IdUtilities.isValidUuidObject(id));
 	}
 }

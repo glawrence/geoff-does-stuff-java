@@ -32,6 +32,11 @@ public class IdUtilities {
     public static final String UUID_REGULAR_EXPRESSION = "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$";
 
     /**
+     * All methods are static, so mark constructor as private
+     */
+    private IdUtilities() {}
+
+    /**
      * Test whether a String with a UUID in contains a valid UUID. The test is done with a regular expression.
      * @param uuid String form of UUID
      * @return true if valid UUID, false otherwise

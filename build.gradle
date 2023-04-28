@@ -6,7 +6,7 @@ group 'com.geoffdoesstuff.java'
 version '1.0-SNAPSHOT'
 
 ext {
-    junit5Version = '5.9.2'
+    junit5Version = '5.9.3'
 }
 
 repositories {
@@ -14,7 +14,8 @@ repositories {
 }
 
 dependencies {
-    testImplementation "org.junit.jupiter:junit-jupiter:${junit5Version}"
+    testImplementation(platform("org.junit:junit-bom:${junit5Version}"))
+    testImplementation('org.junit.jupiter:junit-jupiter')
 }
 
 test {

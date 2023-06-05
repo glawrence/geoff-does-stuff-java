@@ -45,7 +45,7 @@ public class FormattingDatesAndTimes {
         DemoUtilities.outputTitle("ISO_LOCAL_DATE_TIME", true);
         outputDateTime(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
 
-        List<String> patterns = List.of("E dd MMM yyyy hh:mm:ss",
+        List<String> patterns = List.of("E dd MMM yyyy HH:mm:ss",
                 "EEEE, dd MMMM yyyy 'at' hh:mm:ss z",
                 "dd-MM-yyyy G hh:mm:ss VV, v, O",
                 "'day' D 'of' yyyy 'which is in' qqq, 'the' qqqq");

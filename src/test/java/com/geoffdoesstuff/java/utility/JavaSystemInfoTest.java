@@ -49,4 +49,11 @@ class JavaSystemInfoTest {
 		javaVersion = "16.0";
 		assertTrue(javaVersion.compareTo(ELEVEN) >= 0);
 	}
+
+	@Test
+	@DisplayName("Just make sure outputPlatformInfo() does not throw an exception")
+	void outputPlatformInfoTest() {
+		// using a method reference and asserting nothing goes wrong
+		assertDoesNotThrow(JavaSystemInfo::outputPlatformInfo);
+	}
 }

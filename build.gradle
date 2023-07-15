@@ -22,9 +22,11 @@ dependencies {
 test {
     // needed for JUnit 5
     useJUnitPlatform()
-    // this is a useful addition to get information for tests that pass
     testLogging {
-        events "passed", "skipped", "failed"
+        // if there is an exception in the tests, display the stack trace
+        exceptionFormat = 'full'
+        // this is a useful addition to get information for tests that do not fail (passed and skipped)
+        events = [/*"passed",*/ "skipped", "failed"]
     }
 }
 

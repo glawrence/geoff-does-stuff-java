@@ -6,7 +6,7 @@ group 'com.geoffdoesstuff.java'
 version '1.0-SNAPSHOT'
 
 ext {
-    junit5Version = '5.10.0'
+    junit5Version = '5.10.1'
 }
 
 repositories {

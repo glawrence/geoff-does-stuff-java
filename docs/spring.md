@@ -17,7 +17,7 @@ test {
     useJUnitPlatform()
     testLogging {
         exceptionFormat = 'full'
-        events = ["skipped", "failed"]
+        events = ['skipped', 'failed']
     }
     doLast {
         println('Spring Dependency Versions')

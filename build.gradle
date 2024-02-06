@@ -6,7 +6,7 @@ group 'com.geoffdoesstuff.java'
 version '1.0-SNAPSHOT'
 
 ext {
-    junit5Version = '5.10.1'
+    junit5Version = '5.10.2'
 }
 
 repositories {
@@ -26,7 +26,7 @@ test {
         // if there is an exception in the tests, display the stack trace
         exceptionFormat = 'full'
         // this is a useful addition to get information for tests that do not fail (passed and skipped)
-        events = [/*"passed",*/ "skipped", "failed"]
+        events = [/*"passed",*/ 'skipped', 'failed']
     }
 }
 

@@ -1,12 +1,12 @@
 plugins {
-    id 'java'
+    id('java')
 }
 
 group 'com.geoffdoesstuff.java'
 version '1.0-SNAPSHOT'
 
 ext {
-    junit5Version = '5.10.2'
+    junit5Version = '5.11.0'
 }
 
 repositories {

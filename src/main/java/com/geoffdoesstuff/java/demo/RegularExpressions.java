@@ -20,6 +20,8 @@ public class RegularExpressions {
      * is a reasonably simple example that I have tried to document clearly what each element is doing.
      */
     /*
+    https://x.com/einsmanntech/status/1330741869207142403
+     * ============================================================================
      * match the start of the string                   ^
      * match simple literal text                        ID-
      * match only one of A, B or C                         [ABC]

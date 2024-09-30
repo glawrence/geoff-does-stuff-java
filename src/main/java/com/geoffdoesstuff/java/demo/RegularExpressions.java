@@ -82,37 +82,37 @@ public class RegularExpressions {
      */
     public static void main(String[] args) {
         DemoUtilities.outputTitle("Regular Expression - " + REGULAR_EXPRESSION_1, true);
-        processRexExMatching("", REGULAR_EXPRESSION_1);
-        processRexExMatching("ID-C12345AB.", REGULAR_EXPRESSION_1);
-        processRexExMatching("ID-D12345AB", REGULAR_EXPRESSION_1);
-        processRexExMatching("ID-A12345XX", REGULAR_EXPRESSION_1);
-        processRexExMatching("ID-B4321012", REGULAR_EXPRESSION_1);
-        processRexExMatching("ID-A12345A0", REGULAR_EXPRESSION_1);
+        processRegExMatching("", REGULAR_EXPRESSION_1);
+        processRegExMatching("ID-C12345AB.", REGULAR_EXPRESSION_1);
+        processRegExMatching("ID-D12345AB", REGULAR_EXPRESSION_1);
+        processRegExMatching("ID-A12345XX", REGULAR_EXPRESSION_1);
+        processRegExMatching("ID-B4321012", REGULAR_EXPRESSION_1);
+        processRegExMatching("ID-A12345A0", REGULAR_EXPRESSION_1);
 
         DemoUtilities.outputTitle("Regular Expression - " + REGULAR_EXPRESSION_2, true);
-        processRexExMatching("", REGULAR_EXPRESSION_2);
-        processRexExMatching("II-A7X22X", REGULAR_EXPRESSION_2);
-        processRexExMatching("ID-A7X22w", REGULAR_EXPRESSION_2);
-        processRexExMatching("ID-A72X2w", REGULAR_EXPRESSION_2);
-        processRexExMatching("ID-1_488a", REGULAR_EXPRESSION_2);
-        processRexExMatching("ID-A7X22a", REGULAR_EXPRESSION_2);
-        processRexExMatching("ID-A7X22X", REGULAR_EXPRESSION_2);
-        processRexExMatching("ID-A7v22X", REGULAR_EXPRESSION_2);
+        processRegExMatching("", REGULAR_EXPRESSION_2);
+        processRegExMatching("II-A7X22X", REGULAR_EXPRESSION_2);
+        processRegExMatching("ID-A7X22w", REGULAR_EXPRESSION_2);
+        processRegExMatching("ID-A72X2w", REGULAR_EXPRESSION_2);
+        processRegExMatching("ID-1_488a", REGULAR_EXPRESSION_2);
+        processRegExMatching("ID-A7X22a", REGULAR_EXPRESSION_2);
+        processRegExMatching("ID-A7X22X", REGULAR_EXPRESSION_2);
+        processRegExMatching("ID-A7v22X", REGULAR_EXPRESSION_2);
 
         List<String> exampleTextList = List.of("", " ", "a", "1", "~", ".", "A", "AB", "AZS", "GFHFJFJFJF", "AZS7", " AZS");
 
         DemoUtilities.outputTitle("Regular Expression - " + REGULAR_EXPRESSION_3, true);
         for (String exampleText : exampleTextList) {
-            processRexExMatching(exampleText, REGULAR_EXPRESSION_3);
+            processRegExMatching(exampleText, REGULAR_EXPRESSION_3);
         }
 
         DemoUtilities.outputTitle("Regular Expression - " + REGULAR_EXPRESSION_4, true);
         for (String exampleText : exampleTextList) {
-            processRexExMatching(exampleText, REGULAR_EXPRESSION_4);
+            processRegExMatching(exampleText, REGULAR_EXPRESSION_4);
         }
     }
 
-    private static void processRexExMatching(String text, String regularExpression) {
+    private static void processRegExMatching(String text, String regularExpression) {
         if (text.matches(regularExpression)) {
             System.out.println("Regex match! Matched '" + text + "' against " + regularExpression);
         } else {

@@ -3,6 +3,7 @@ package com.geoffdoesstuff.java.demo;
 import com.geoffdoesstuff.java.utility.DemoUtilities;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * A working demo of Regular Expressions.
@@ -110,6 +111,21 @@ public class RegularExpressions {
         for (String exampleText : exampleTextList) {
             processRegExMatching(exampleText, REGULAR_EXPRESSION_4);
         }
+
+        DemoUtilities.outputTitle("RegEx Pattern");
+        createRegExPattern();
+    }
+
+    private static void createRegExPattern() {
+        // without Pattern.CASE_INSENSITIVE only the last one matches
+        Pattern newRegEx = Pattern.compile(REGULAR_EXPRESSION_4, Pattern.CASE_INSENSITIVE);
+        System.out.println(newRegEx.pattern());
+        System.out.println(newRegEx.matcher("MyInputStringWith42").matches());
+        System.out.println(newRegEx.matcher("MyInputStringWith").matches());
+        System.out.println(newRegEx.matcher("myinputstringwith").matches());
+        System.out.println(newRegEx.matcher("MYINPUTSTRINGWITH").matches());
+        System.out.println(newRegEx.matcher("MYINPUTSTRINGWITH"));
+        System.out.println(newRegEx.matcher("MYINPUTSTRINGWITH").toMatchResult());
     }
 
     private static void processRegExMatching(String text, String regularExpression) {

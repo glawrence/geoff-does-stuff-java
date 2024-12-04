@@ -138,6 +138,10 @@ public class DatesAndTimes {
 		System.out.println("Milli: " + currentInst.toEpochMilli());
 		System.out.println("Nano: " + currentInst.getNano());
 		System.out.println("Instant Now: " + Instant.now().toString());
+		Clock clock = Clock.systemUTC();
+		System.out.println(clock);
+		System.out.println(clock.instant());
+		System.out.println(clock.instant().getEpochSecond());
 	}
 
 	private void dateTimeCalculations() {

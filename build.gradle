@@ -1,5 +1,5 @@
 plugins {
-    id('java')
+    id('application') // this includes the java & distribution plugins
 }
 
 group 'com.geoffdoesstuff.java'
@@ -7,6 +7,14 @@ version '1.0-SNAPSHOT'
 
 ext {
     junit5Version = '5.11.3'
+}
+
+application {
+    mainClass = 'com.geoffdoesstuff.java.MainDemoApp'
+}
+
+run {
+    standardInput = System.in
 }
 
 repositories {
@@ -43,7 +51,7 @@ java {
 jar {
     manifest {
         // information to put into MANIFEST.MF in the jar file, does not apply to JavaDoc or Sources Jar files
-        attributes('Main-Class': 'com.geoffdoesstuff.java.MainDemoApp',
+        attributes('Main-Class': application.mainClass,
                    'Implementation-Title': project.name,
                    'Implementation-Version': project.version,
                    'Implementation-Vendor': 'Geoff Does Stuff')

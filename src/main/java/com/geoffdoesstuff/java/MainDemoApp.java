@@ -16,12 +16,16 @@ public class MainDemoApp {
 	public static void main(String[] args) {
 		System.out.println("Welcome....");
 		List<String> classNames = DemoSupport.getDemoClasses(DEMO_CLASSPATH, true);
-		if (classNames.size() > 0) {
-			System.out.printf("Demo classes found in %s: %d%n", DEMO_CLASSPATH, classNames.size());
-		} else {
+		if (classNames.isEmpty()) {
 			System.out.printf("No demo classes found in %s", DEMO_CLASSPATH);
-			return; // if there are no demo classes we need to avoid showing the menu
+		} else {
+			System.out.printf("Demo classes found in %s: %d%n", DEMO_CLASSPATH, classNames.size());
+			processInputViaMenu(classNames);
 		}
+		System.out.println("All done!");
+	}
+
+	private static void processInputViaMenu(List<String> classNames) {
 		Scanner keyboard = new Scanner(System.in);
 		displayMenu(classNames);
 		do {
@@ -41,7 +45,6 @@ public class MainDemoApp {
 			displayMenu(classNames);
 		} while (true);
 		keyboard.close();
-		System.out.println("All done!");
 	}
 
 	private static void displayMenu(List<String> classNames) {

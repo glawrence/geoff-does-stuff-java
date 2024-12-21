@@ -1,9 +1,10 @@
 plugins {
+    // see https://docs.gradle.org/current/userguide/application_plugin.html
     id('application') // this includes the java & distribution plugins
 }
 
-group 'com.geoffdoesstuff.java'
-version '1.0-SNAPSHOT'
+group = 'com.geoffdoesstuff.java'
+version = '1.0-SNAPSHOT'
 
 ext {
     junit5Version = '5.11.3'

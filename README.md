@@ -58,8 +58,7 @@ When working on the JavaDoc you don't need to do a complete build by running eve
 ### Windows
 
 ```
-gradlew javadoc
-start .\build\docs\javadoc\index.html
+gradlew javadoc && start .\build\docs\javadoc\index.html
 ```
 
 ### macOS

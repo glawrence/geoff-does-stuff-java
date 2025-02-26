@@ -15,15 +15,15 @@ The first and common step, is to change into the project directory on your local
 ### macOS
 I hope to find a better way to do this, but for now, I am using this single command on macOS:
 
-`./gradlew build && java -cp ./build/libs/geoff-does-stuff-java-1.0-SNAPSHOT.jar com.geoffdoesstuff.java.MainDemoApp`
+`./gradlew build && java -cp ./build/libs/geoff-does-stuff-java-0.1.0.jar com.geoffdoesstuff.java.MainDemoApp`
 
 After setting 'Main-Class' in the build.gradle file, inside jar/manifest/attributes you can simplify the above to this:
 
-`./gradlew build && java -jar ./build/libs/geoff-does-stuff-java-1.0-SNAPSHOT.jar`
+`./gradlew build && java -jar ./build/libs/geoff-does-stuff-java-0.1.0.jar`
 
 Alternatively to run a specific demo you can use the following:
 
-`java -cp ./build/libs/geoff-does-stuff-java-1.0-SNAPSHOT.jar com.geoffdoesstuff.java.demo.Optionals`
+`java -cp ./build/libs/geoff-does-stuff-java-0.1.0.jar com.geoffdoesstuff.java.demo.Optionals`
 
 After switching to the "application" plugin, instead of "java" and adding some config I was able to use the following, which is a simpler version of the original command above:
 
@@ -42,24 +42,22 @@ Followed by
 
 or
 
-`java -jar .\build\libs\geoff-does-stuff-java-1.0-SNAPSHOT.jar`
+`java -jar .\build\libs\geoff-does-stuff-java-0.1.0.jar`
 
 This will run the Demo App and display a menu, alternatively you can run a specific demo direct, as follows: 
 
-`java -cp .\build\libs\geoff-does-stuff-java-1.0-SNAPSHOT.jar com.geoffdoesstuff.java.demo.Optionals`
+`java -cp .\build\libs\geoff-does-stuff-java-0.1.0.jar com.geoffdoesstuff.java.demo.Optionals`
 
 However, if Java is not on the path then this works if JAVA_HOME is set:
 
-`%JAVA_HOME%\bin\java -jar .\build\libs\geoff-does-stuff-java-1.0-SNAPSHOT.jar`
+`%JAVA_HOME%\bin\java -jar .\build\libs\geoff-does-stuff-java-0.1.0.jar`
 
 ## Reading JavaDoc
 When working on the JavaDoc you don't need to do a complete build by running everything including the unit tests. Here are some instructions for building the JavaDoc and then viewing it in the default browser.
 
 ### Windows
 
-```
-gradlew javadoc && start .\build\docs\javadoc\index.html
-```
+`gradlew javadoc && start .\build\docs\javadoc\index.html`
 
 ### macOS
 

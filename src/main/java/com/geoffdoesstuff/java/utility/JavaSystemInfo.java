@@ -132,6 +132,20 @@ public class JavaSystemInfo {
 		return ! (isPlatformWindows() || isPlatformMacOS() || isPlatformLinux());
 	}
 
+	public static OperatingSystem getOperatingSystem() {
+		OperatingSystem os = OperatingSystem.UNKNOWN;
+		if (isPlatformLinux()) {
+			os = OperatingSystem.LINUX;
+		}
+		if (isPlatformMacOS()) {
+			os = OperatingSystem.MACOS;
+		}
+		if (isPlatformWindows()) {
+			os = OperatingSystem.WINDOWS;
+		}
+		return os;
+	}
+
 	private static String getPropertyOutput(String strProperty) {
 		return strProperty.replaceAll("[.]", " ") + ": " + System.getProperty(strProperty, strProperty + " was not found");
 	}

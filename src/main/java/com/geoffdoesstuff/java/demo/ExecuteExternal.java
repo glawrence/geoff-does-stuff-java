@@ -35,7 +35,7 @@ public class ExecuteExternal {
 			}
 			case MACOS, LINUX -> { // ping count = 1, timeout = 1s
 				commandLine = "ping -c 1 -t 1 " + hostname;
-				commandLineArray = new String[] {"ping", "-c 1", "-t 1 " + hostname};
+				commandLineArray = new String[] {"ping", "-c 1", "-t 1", hostname};
 			}
 			default           -> {
 				commandLine = null;
@@ -87,6 +87,7 @@ public class ExecuteExternal {
 			if (JavaSystemInfo.isPlatformMacOS()) {
 				switch (result) {
 					case  2 -> message = "Ping sent but no response";
+					case 64 -> message = "Command line usage error";
 					case 68 -> message = "Cannot resolve, unknown host";
 					default -> message = "ERROR: ping failed";
 				}

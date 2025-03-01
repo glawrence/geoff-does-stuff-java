@@ -132,6 +132,10 @@ public class JavaSystemInfo {
 		return ! (isPlatformWindows() || isPlatformMacOS() || isPlatformLinux());
 	}
 
+	/**
+	 * Get the current Operating System family as an enum
+	 * @return operating system as an enum
+	 */
 	public static OperatingSystem getOperatingSystem() {
 		OperatingSystem os = OperatingSystem.UNKNOWN;
 		if (isPlatformLinux()) {

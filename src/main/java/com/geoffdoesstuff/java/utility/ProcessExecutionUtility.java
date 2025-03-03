@@ -2,8 +2,17 @@ package com.geoffdoesstuff.java.utility;
 
 import java.io.IOException;
 
+/**
+ * The intention of this utility class is to make executing external programs easy, but also to provide flexibility. In
+ * part, it is also a "demonstration".
+ */
 public class ProcessExecutionUtility {
 
+    /**
+     * The method uses the original Java 1.0 approach to external execution.
+     * @param commandLine whole command line on a single String
+     * @return a {@link ProcessExecutionResult}
+     */
     public static ProcessExecutionResult runtimeExecute(String commandLine) {
         try {
             Process proc = Runtime.getRuntime().exec(commandLine);
@@ -15,6 +24,12 @@ public class ProcessExecutionUtility {
         }
     }
 
+    /**
+     * This method uses the Java 1.5 ProcessBuilder to execute external processes. It takes an array of String so
+     * you can pass parameters separately.
+     * @param commandLine string array of program and optionally, arguments
+     * @return a {@link ProcessExecutionResult}
+     */
     public static ProcessExecutionResult processBuilder(String... commandLine) {
         try {
             Process process = new ProcessBuilder(commandLine).start();
@@ -26,9 +41,16 @@ public class ProcessExecutionUtility {
         }
     }
 
+    /**
+     * This method is specific to the ping utility.
+     * @param result the process exit code
+     * @return text based on exit code and operating system
+     */
     private static String displayExecutionResult(int result) {
-        String message = null;
-        if (result != 0) {
+        String message;
+        if (result == 0) {
+            message = null;
+        } else {
             if (JavaSystemInfo.isPlatformMacOS()) {
                 switch (result) {
                     case  2 -> message = "Ping sent but no response";

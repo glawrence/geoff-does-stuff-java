@@ -19,6 +19,34 @@ public class ExecuteExternal {
 		DemoUtilities.outputTitle("Execute External");
 		DemoUtilities.outputTitle("Ping Test", true);
 		pingTest();
+		DemoUtilities.outputTitle("PowerShell Test (with output)", true);
+		powerShellTest();
+	}
+
+	private static void powerShellTest() {
+		ProcessExecutionResult executionResult;
+		executionResult = ProcessExecutionUtility.runtimeExecuteWithOutput("pwsh -Command \"Write-Output 'StdOut 1'; Write-Error 'StdErr'; Write-Output 'StdOut 2'\"");
+		if (executionResult.success()) {
+			System.out.println("The PowerShell executed successfully");
+		} else {
+			System.out.println("The PowerShell failed");
+			System.out.println("  " + executionResult.errorMessage());
+		}
+		System.out.println("Process Output");
+		System.out.println("~~~~~~~~~~~~~~");
+		System.out.println(executionResult.processOutput());
+		System.out.println("~~~~~~~~~~~~~~");
+		executionResult = ProcessExecutionUtility.processBuilderWithOutput("pwsh", "-Command", "\"Write-Output 'StdOut 1'; Write-Error 'StdErr'; Write-Output 'StdOut 2'\"");
+		if (executionResult.success()) {
+			System.out.println("The PowerShell executed successfully");
+		} else {
+			System.out.println("The PowerShell failed");
+			System.out.println("  " + executionResult.errorMessage());
+		}
+		System.out.println("Process Output");
+		System.out.println("~~~~~~~~~~~~~~");
+		System.out.println(executionResult.processOutput());
+		System.out.println("~~~~~~~~~~~~~~");
 	}
 
 	private static void pingTest() {

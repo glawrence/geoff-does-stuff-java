@@ -2,6 +2,8 @@ package com.geoffdoesstuff.java.utility;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -55,5 +57,23 @@ class JavaSystemInfoTest {
 	void outputPlatformInfoTest() {
 		// using a method reference and asserting nothing goes wrong
 		assertDoesNotThrow(JavaSystemInfo::outputPlatformInfo);
+	}
+
+	@Test
+	@EnabledOnOs(OS.WINDOWS)
+	void testOnWindows() {
+		assertTrue(JavaSystemInfo.isPlatformWindows());
+		assertFalse(JavaSystemInfo.isPlatformMacOS());
+		assertFalse(JavaSystemInfo.isPlatformLinux());
+		assertFalse(JavaSystemInfo.isPlatformOther());
+	}
+
+	@Test
+	@EnabledOnOs(OS.MAC)
+	void testOnMacOS() {
+		assertFalse(JavaSystemInfo.isPlatformWindows());
+		assertTrue(JavaSystemInfo.isPlatformMacOS());
+		assertFalse(JavaSystemInfo.isPlatformLinux());
+		assertFalse(JavaSystemInfo.isPlatformOther());
 	}
 }

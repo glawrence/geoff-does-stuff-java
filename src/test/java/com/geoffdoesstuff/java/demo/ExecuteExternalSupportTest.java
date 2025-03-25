@@ -29,7 +29,11 @@ class ExecuteExternalSupportTest {
     @EnumSource
     void generateCommandLineArray_BasicTest(ExecuteExternalSupport.CommandLine commandLineEnum) {
         String[] commandLine = ExecuteExternalSupport.generateCommandLineArray(commandLineEnum, "ping-host");
-        assertEquals(3, commandLine.length);
+        if (JavaSystemInfo.isPlatformMacOS() && commandLineEnum.equals(ExecuteExternalSupport.CommandLine.PING)) {
+            assertEquals(4, commandLine.length);
+        } else {
+            assertEquals(3, commandLine.length);
+        }
         for (String item: commandLine) {
             assertFalse(item.isEmpty());
         }

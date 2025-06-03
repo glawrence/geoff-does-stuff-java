@@ -107,7 +107,7 @@ public class Optionals {
         reportOptionalState(Optional.of("100"));
     }
 
-    private static <T> void reportOptionalState(Optional optional) {
+    private static void reportOptionalState(Optional optional) {
         if (optional.isEmpty()) {
             System.out.println("The optional is empty");
         } else {

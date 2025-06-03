@@ -15,7 +15,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * Optional was designed for being return values from methods, not elsewhere like fields or method parameters
  * With Optional, the get() method is a trap, a magnet for misuse, remember it throws an exception if it is empty
  * Remember Optional is a box, a 16 byte object
- *
+
  The following rules are courtesy of Stuart Marks in his Devoxx talk on Optional in 2016:
  <ul>
    <li>Rule 1 - never assign null to something of type Optional</li>
@@ -79,6 +79,7 @@ public class Optionals {
         System.out.println("Compare b - " + ((one.equals(two)) ? "Match":"Different"));
         System.out.println("--ifPresentDemo()--");
         ifPresentDemo();
+        nullDemo();
         orElseDemo();
     }
 
@@ -94,11 +95,38 @@ public class Optionals {
     }
 
     /**
+     * It is important to note that if an Optional contains null then it is considered empty,
+     * thus, .isEmpty() returns true. You cannot pass a null into .of(), you need to use
+     * .ofNullable(), if you don't you will get a NullPointerException.
+     */
+    private static void nullDemo() {
+        DemoUtilities.outputTitle("Example of .ofNullable()", true);
+
+        reportOptionalState(Optional.of(100));
+        reportOptionalState(Optional.ofNullable(null));
+        reportOptionalState(Optional.of("100"));
+    }
+
+    private static <T> void reportOptionalState(Optional optional) {
+        if (optional.isEmpty()) {
+            System.out.println("The optional is empty");
+        } else {
+            System.out.println("The optional contains something of type " + optional.get().getClass());
+        }
+        if (optional.isPresent()) {
+            System.out.println("The optional contains something of type " + optional.get().getClass());
+        } else {
+            System.out.println("The optional is empty");
+        }
+    }
+
+    /**
      * Demonstrate the various "orElse" methods on the Optional class.
      */
     private static void orElseDemo() {
-        int loopIterations = 4;
         DemoUtilities.outputTitle("Example of .orElseThrow()", true);
+
+        int loopIterations = 4;
         for (int i = 1; i <= loopIterations; i++) {
             System.out.println("orElseThrowDemo " + i + " of " + loopIterations);
             try {

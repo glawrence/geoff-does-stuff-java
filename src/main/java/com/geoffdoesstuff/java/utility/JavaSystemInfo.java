@@ -74,6 +74,56 @@ public class JavaSystemInfo {
 	}
 
 	/**
+	 * Check if we are on Java 19 or higher, returning true if we are
+	 * @return boolean
+	 */
+	public static boolean isAtLeastJava19() {
+		return (System.getProperty("java.version", DEFAULT_VERSION).compareTo("19") >= 0);
+	}
+
+	/**
+	 * Check if we are on Java 20 or higher, returning true if we are
+	 * @return boolean
+	 */
+	public static boolean isAtLeastJava20() {
+		return (System.getProperty("java.version", DEFAULT_VERSION).compareTo("20") >= 0);
+	}
+	/**
+	 * Check if we are on Java 21 or higher, returning true if we are
+	 * @return boolean
+	 */
+	public static boolean isAtLeastJava21() {
+		return (System.getProperty("java.version", DEFAULT_VERSION).compareTo("21") >= 0);
+	}
+	/**
+	 * Check if we are on Java 22 or higher, returning true if we are
+	 * @return boolean
+	 */
+	public static boolean isAtLeastJava22() {
+		return (System.getProperty("java.version", DEFAULT_VERSION).compareTo("22") >= 0);
+	}
+	/**
+	 * Check if we are on Java 23 or higher, returning true if we are
+	 * @return boolean
+	 */
+	public static boolean isAtLeastJava23() {
+		return (System.getProperty("java.version", DEFAULT_VERSION).compareTo("23") >= 0);
+	}
+	/**
+	 * Check if we are on Java 24 or higher, returning true if we are
+	 * @return boolean
+	 */
+	public static boolean isAtLeastJava24() {
+		return (System.getProperty("java.version", DEFAULT_VERSION).compareTo("24") >= 0);
+	}
+	/**
+	 * Check if we are on Java 25 or higher, returning true if we are
+	 * @return boolean
+	 */
+	public static boolean isAtLeastJava25() {
+		return (System.getProperty("java.version", DEFAULT_VERSION).compareTo("25") >= 0);
+	}
+	/**
 	 * Output the Java Version demo
 	 */
 	public static void javaVersionDemo() {

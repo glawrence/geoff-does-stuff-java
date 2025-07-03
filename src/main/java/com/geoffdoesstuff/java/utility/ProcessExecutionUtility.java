@@ -113,10 +113,10 @@ public class ProcessExecutionUtility {
                     case  2 -> message = "Ping sent but no response";
                     case 64 -> message = "Command line usage error";
                     case 68 -> message = "Cannot resolve, unknown host";
-                    default -> message = "ERROR: ping failed";
+                    default -> message = "ERROR: ping failed, with exit code " + result;
                 }
             } else {
-                message = "Command executed but failed, Exit Code: " + result;
+                message = "Command executed but failed, with exit code " + result;
             }
         }
         return message;

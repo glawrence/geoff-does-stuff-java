@@ -15,6 +15,12 @@ public class ExecuteExternal {
 	private static final ExecuteExternalSupport.CommandLine PING_COMMAND_LINE = ExecuteExternalSupport.CommandLine.PING;
 
 	/**
+	 * This is here to suppress JavaDoc complaining about not commenting the default constructor
+	 */
+	private ExecuteExternal() {
+	}
+
+	/**
 	 * Main method, for independent running or use via Demo Menu
 	 * @param args command line
 	 */
@@ -28,6 +34,7 @@ public class ExecuteExternal {
 		pythonTest();
 	}
 
+	@SuppressWarnings("deprecation")
 	private static void pythonTest() {
 		ProcessExecutionResult executionResult;
 		executionResult = ProcessExecutionUtility.runtimeExecuteWithOutput(ExecuteExternalSupport.generateCommandLine(PYTHON_COMMAND_LINE));
@@ -48,6 +55,7 @@ public class ExecuteExternal {
 		outputProcessOutput(executionResult);
 	}
 
+	@SuppressWarnings("deprecation")
 	private static void powerShellTest() {
 		ProcessExecutionResult executionResult;
 		executionResult = ProcessExecutionUtility.runtimeExecuteWithOutput(ExecuteExternalSupport.generateCommandLine(POWERSHELL_COMMAND_LINE));
@@ -68,6 +76,7 @@ public class ExecuteExternal {
 		outputProcessOutput(executionResult);
 	}
 
+	@SuppressWarnings("deprecation")
 	private static void pingTest() {
 		final String hostname = "192.168.1.1";
 

@@ -13,6 +13,12 @@ import java.time.format.DateTimeParseException;
 public class DatesAndTimes {
 
 	/**
+	 * This is here to suppress JavaDoc complaining about not commenting the default constructor
+	 */
+	private DatesAndTimes() {
+	}
+
+	/**
 	 * Main method, for independent running or use via Demo Menu
 	 * @param args command line
 	 */

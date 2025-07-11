@@ -9,6 +9,12 @@ import java.util.UUID;
 public class CollectionUtilities {
 
     /**
+     * This is here to suppress JavaDoc complaining about not commenting the default constructor
+     */
+    private CollectionUtilities() {
+    }
+
+    /**
      * Test if the list of strings is immutable or not and return true if it is immutable, or in other words
      * return true if the list <strong>cannot</strong> be added to or updated.
      *

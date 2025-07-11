@@ -11,6 +11,12 @@ import com.geoffdoesstuff.java.utility.DemoUtilities;
 public class Logic {
 
     /**
+     * This is here to suppress JavaDoc complaining about not commenting the default constructor
+     */
+    private Logic() {
+    }
+
+    /**
      * Main method, for independent running or use via MainDemoApp menu
      * @param args command line
      * @see com.geoffdoesstuff.java.MainDemoApp
@@ -65,7 +71,7 @@ public class Logic {
     }
 
     /**
-     * Patterns in switch are still in preview for Java 17
+     * Patterns in switch are still in preview for Java 17, released in Java 21
      * @param object any object
      */
     private static void patternMatchSwitch(Object object) {

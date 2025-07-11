@@ -11,12 +11,36 @@ import com.geoffdoesstuff.java.utility.JavaSystemInfo;
  */
 public class ExecuteExternalSupport {
 
+    /**
+     * This is here to suppress JavaDoc complaining about not commenting the default constructor
+     */
+    private ExecuteExternalSupport() {
+    }
+
+    /**
+     * The fixed list of Command Line options.
+     */
     public enum CommandLine {
+        /**
+         * Operating System "ping" command
+         */
         PING,
+        /**
+         * Execute PowerShell
+         */
         POWERSHELL,
+        /**
+         * Execute Python
+         */
         PYTHON
     }
 
+    /**
+     * Take the command line, and optional arguments and generate a single comment line string.
+     * @param commandLine the command line to execute
+     * @param arguments command line arguments as Variable Arguments
+     * @return generated command line
+     */
     public static String generateCommandLine(CommandLine commandLine, String... arguments) {
         switch (commandLine) {
             case PING -> {
@@ -45,6 +69,12 @@ public class ExecuteExternalSupport {
         }
     }
 
+    /**
+     * Take the command line, and optional arguments and generate an array of strings.
+     * @param commandLine the command line to execute
+     * @param arguments command line arguments as Variable Arguments
+     * @return generated command line
+     */
     public static String[] generateCommandLineArray(CommandLine commandLine, String... arguments) {
         switch (commandLine) {
             case PING -> {

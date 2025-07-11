@@ -7,7 +7,7 @@ group = 'com.geoffdoesstuff.java'
 version = '0.1.0'
 
 ext {
-    junit5Version = '6.0.0-M1' //5.13.2 latest release
+    junit5Version = '6.0.0-M1' //5.13.3 latest release
 }
 
 application {
@@ -59,4 +59,9 @@ jar {
                    'Implementation-Version': project.version,
                    'Implementation-Vendor': 'Geoff Does Stuff')
     }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.deprecation = true // convenience property instead of adding '-Xlint:deprecation' via compilerArgs
+    options.compilerArgs += ['-Xlint:unchecked']
 }

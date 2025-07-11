@@ -9,6 +9,12 @@ import java.util.Optional;
 public class ObjectUtilities {
 
     /**
+     * This is here to suppress JavaDoc complaining about not commenting the default constructor
+     */
+    private ObjectUtilities() {
+    }
+
+    /**
      * Test if the {@link java.util.Optional} is null or empty
      * @param optional to test
      * @return true if null or empty

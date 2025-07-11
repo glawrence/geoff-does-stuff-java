@@ -78,6 +78,12 @@ public class RegularExpressions {
             "^[A-Z]+$";
 
     /**
+     * This is here to suppress JavaDoc complaining about not commenting the default constructor
+     */
+    private RegularExpressions() {
+    }
+
+    /**
      * Main method, for independent running or use via Demo Menu
      * @param args command line
      */

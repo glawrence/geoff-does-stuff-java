@@ -12,6 +12,12 @@ import java.util.UUID;
 public class UniqueID {
 
 	/**
+	 * This is here to suppress JavaDoc complaining about not commenting the default constructor
+	 */
+    private UniqueID() {
+    }
+
+    /**
 	 * Main method, for independent running or use via Demo Menu
 	 * @param args command line
 	 */

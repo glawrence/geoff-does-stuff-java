@@ -8,6 +8,12 @@ import java.util.Objects;
 public class DemoUtilities {
 
     /**
+     * This is here to suppress JavaDoc complaining about not commenting the default constructor
+     */
+    private DemoUtilities() {
+    }
+
+    /**
         Output as a "major" title
      * @param title text to display as a title
      */

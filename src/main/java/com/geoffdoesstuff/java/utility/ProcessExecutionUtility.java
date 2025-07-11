@@ -10,10 +10,18 @@ import java.io.IOException;
 public class ProcessExecutionUtility {
 
     /**
+     * This is here to suppress JavaDoc complaining about not commenting the default constructor
+     */
+    private ProcessExecutionUtility() {
+    }
+
+    /**
      * The method uses the original Java 1.0 approach to external execution.
+     * @deprecated this method is deprecated because Runtime.exec() was deprecated in Java 18
      * @param commandLine whole command line on a single String
      * @return a {@link ProcessExecutionResult}
      */
+    @Deprecated
     public static ProcessExecutionResult runtimeExecute(String commandLine) {
         try {
             Process process = Runtime.getRuntime().exec(commandLine);
@@ -28,9 +36,11 @@ public class ProcessExecutionUtility {
     /**
      * Same as runtimeExecute() but also captures the output. The drawback of this compared to processBuilderWithOutput()
      * is that the standard output comes first, followed by the errors, hence the errors will be out of order.
+     * @deprecated this method is deprecated because Runtime.exec() was deprecated in Java 18
      * @param commandLine whole command line on a single String
      * @return a {@link ProcessExecutionResult}
      */
+    @Deprecated
     public static ProcessExecutionResult runtimeExecuteWithOutput(String commandLine) {
         try {
             Process process = Runtime.getRuntime().exec(commandLine);

@@ -9,6 +9,12 @@ import java.net.ServerSocket;
 public class NetworkUtilities {
 
     /**
+     * This is here to suppress JavaDoc complaining about not commenting the default constructor
+     */
+    private NetworkUtilities() {
+    }
+
+    /**
      * Find the number of a free port on the local machine.
      * @return number of free port
      */

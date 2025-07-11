@@ -12,6 +12,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Repeating {
 
     /**
+     * This is here to suppress JavaDoc complaining about not commenting the default constructor
+     */
+    private Repeating() {
+    }
+
+    /**
      * Main method, for independent running or use via Demo Menu
      * @param args command line
      */

@@ -10,6 +10,12 @@ public class MainDemoApp {
 	private static final String DEMO_CLASSPATH = "com.geoffdoesstuff.java.demo";
 
 	/**
+	 * This is here to suppress JavaDoc complaining about not commenting the default constructor
+	 */
+	private MainDemoApp() {
+	}
+
+	/**
 	 * This is my main demo app class, that looks for the demo classes and puts them into a menu.
 	 * @param args command line arguments
 	 */

@@ -10,6 +10,12 @@ public class TextUtilities {
     private static final String REGEX_ANY_CHARACTER = ".";
 
     /**
+     * This is here to suppress JavaDoc complaining about not commenting the default constructor
+     */
+    private TextUtilities() {
+    }
+
+    /**
      * Utility method to help test for something that is either null or empty. A string with whitespace in is
      * not empty. See also isNullOrBlank()
      * @param text input String object

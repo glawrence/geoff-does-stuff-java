@@ -2,7 +2,21 @@ package com.geoffdoesstuff.java.demo;
 
 import java.time.Duration;
 
+/**
+ * Demonstration of what kind of system information you can get.
+ */
 public class SystemInformation {
+
+    /**
+     * This is here to suppress JavaDoc complaining about not commenting the default constructor
+     */
+    private SystemInformation() {
+    }
+
+    /**
+     * Main method, for independent running or use via MainDemoApp menu
+     * @param args command line
+     */
     public static void main(String... args) {
         // System::nanoTime always increases, unlike the time in millis which can go backwards after an NTP sync
         System.out.println(System.nanoTime());

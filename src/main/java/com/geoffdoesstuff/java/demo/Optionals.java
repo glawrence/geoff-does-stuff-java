@@ -32,6 +32,12 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Optionals {
 
     /**
+     * This is here to suppress JavaDoc complaining about not commenting the default constructor
+     */
+    private Optionals() {
+    }
+
+    /**
      * Main method, for independent running or use via MainDemoApp menu
      * @param args command line
      * @see com.geoffdoesstuff.java.MainDemoApp

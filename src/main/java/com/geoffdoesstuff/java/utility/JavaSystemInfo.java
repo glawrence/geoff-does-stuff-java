@@ -10,6 +10,12 @@ public class JavaSystemInfo {
 	private static final String DEFAULT_VERSION = "0.0";
 
 	/**
+	 * This is here to suppress JavaDoc complaining about not commenting the default constructor
+	 */
+	private JavaSystemInfo() {
+	}
+
+	/**
 	 * Write some basic JVM version and vendor information to standard out
 	 * <p>
 	 * There are a number of system properties that are useful to know about when trying to understand the details of

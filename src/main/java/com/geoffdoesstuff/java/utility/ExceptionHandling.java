@@ -11,6 +11,12 @@ import java.util.List;
 public class ExceptionHandling {
 
 	/**
+	 * This is here to suppress JavaDoc complaining about not commenting the default constructor
+	 */
+	private ExceptionHandling() {
+	}
+
+	/**
 	 * Convert the Stack Trace to a single string, exactly as printStackTrace() would output it to stderr.
 	 * @param exception to be converted
 	 * @return String representation

@@ -7,7 +7,7 @@ group = 'com.geoffdoesstuff.java'
 version = '0.1.0'
 
 ext {
-    junit5Version = '6.0.0-M1' //5.13.4 latest release
+    junit5Version = '6.0.0-RC2' //5.13.4 latest release
 }
 
 application {
@@ -18,8 +18,10 @@ run {
     standardInput = System.in
 }
 
-repositories {
-    mavenCentral()
+allprojects {
+    repositories {
+        mavenCentral()
+    }
 }
 
 dependencies {

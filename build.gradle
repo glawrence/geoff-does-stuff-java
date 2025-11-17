@@ -7,7 +7,7 @@ group = 'com.geoffdoesstuff.java'
 version = '0.1.0'
 
 ext {
-    junit5Version = '6.0.0-RC2' //5.13.4 latest release
+    junitVersion = '6.0.1'
 }
 
 application {
@@ -25,13 +25,13 @@ allprojects {
 }
 
 dependencies {
-    testImplementation(platform("org.junit:junit-bom:$junit5Version"))
+    testImplementation(platform("org.junit:junit-bom:$junitVersion"))
     testImplementation('org.junit.jupiter:junit-jupiter')
     testRuntimeOnly('org.junit.platform:junit-platform-launcher')
 }
 
 test {
-    // needed for JUnit 5
+    // needed for JUnit
     useJUnitPlatform()
     // execute tasks in parallel if possible
     maxParallelForks = 3

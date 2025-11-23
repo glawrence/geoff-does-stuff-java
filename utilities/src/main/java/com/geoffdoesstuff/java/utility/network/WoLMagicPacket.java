@@ -1,9 +1,10 @@
 package com.geoffdoesstuff.java.utility.network;
 
+import com.geoffdoesstuff.java.utility.TextUtilities;
+
 import java.util.Arrays;
 import java.util.HexFormat;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Class to make a "magic packet" for use with Wake-on-LAN. The only input needed is the MAC address, either in text
@@ -87,18 +88,24 @@ public class WoLMagicPacket {
     }
 
     /**
-     * Handle colon, space or hyphen separated, currently 052D.857D.A5CD is not supported but it is rare.
+     * Handle colon, space or hyphen separated MAC addresses, as well as those with no separator or the rare 14
+     * character length option.
      * @param macAddress potential MAC address to parse
      * @return MAC address in colon separated format
      */
     private String parse(String macAddress) {
-        if (Objects.isNull(macAddress) || macAddress.isEmpty()) {
+        if (TextUtilities.isNullOrBlank(macAddress)) {
             throw new IllegalArgumentException("No MAC address supplied");
         }
         if (macAddress.length() == 12) {
             macAddress = macAddress.substring(0, 2) + ":" + macAddress.substring(2, 4) +
                 ":" + macAddress.substring(4, 6) + ":" + macAddress.substring(6, 8) +
                 ":" + macAddress.substring(8, 10) + ":" + macAddress.substring(10, 12);
+        }
+        if (macAddress.length() == 14) { // 052D.857D.A5CD is a rare MAC address format
+            macAddress = macAddress.substring(0, 2) + ":" + macAddress.substring(2, 4) +
+                    ":" + macAddress.substring(5, 7) + ":" + macAddress.substring(7, 9) +
+                    ":" + macAddress.substring(10, 12) + ":" + macAddress.substring(12, 14);
         }
         if (macAddress.length() != 17) {
             throw new IllegalArgumentException("Invalid MAC address supplied");

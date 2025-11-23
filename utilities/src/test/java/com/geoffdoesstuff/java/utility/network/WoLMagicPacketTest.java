@@ -36,6 +36,7 @@ class WoLMagicPacketTest {
                 Arguments.of("05-2D-85-7D-A5-CD", STANDARD_BYTES),
                 Arguments.of("05 2D 85 7D A5 CD", STANDARD_BYTES),
                 Arguments.of("05:2D-85 7D-A5:CD", STANDARD_BYTES),
+                Arguments.of("052D.857D.A5CD", STANDARD_BYTES),
                 Arguments.of("37:12:85:D3:29:B2", new byte[]{-1, -1, -1, -1, -1, -1, 55, 18, -123, -45, 41,
                         -78, 55, 18, -123, -45, 41, -78, 55, 18, -123, -45, 41, -78, 55, 18, -123, -45, 41, -78, 55, 18,
                         -123, -45, 41, -78, 55, 18, -123, -45, 41, -78, 55, 18, -123, -45, 41, -78, 55, 18, -123, -45,
@@ -99,6 +100,7 @@ class WoLMagicPacketTest {
                 Arguments.of("05-2D-85-7D-A5-CD", STANDARD_MAC_ADDRESS, new byte[]{5, 45, -123, 125, -91, -51}),
                 Arguments.of("05 2D 85 7D A5 CD", STANDARD_MAC_ADDRESS, new byte[]{5, 45, -123, 125, -91, -51}),
                 Arguments.of("052D857DA5CD", STANDARD_MAC_ADDRESS, new byte[]{5, 45, -123, 125, -91, -51}),
+                Arguments.of("052D.857D.A5CD", STANDARD_MAC_ADDRESS, new byte[]{5, 45, -123, 125, -91, -51}),
                 Arguments.of(STANDARD_MAC_ADDRESS, STANDARD_MAC_ADDRESS, new byte[]{5, 45, -123, 125, -91, -51}));
     }
 

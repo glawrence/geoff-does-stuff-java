@@ -25,6 +25,17 @@ import java.util.Scanner;
  */
 public class KaprekarRoutine {
 
+    /**
+     * This is here to suppress JavaDoc complaining about not commenting the default constructor
+     */
+    private KaprekarRoutine() {
+    }
+
+    /**
+     * Start the Kaprekar Routine utility, which can be run in test mode, demo mode, or interactive mode, where the
+     * latter is the default
+     * @param args only first arg is used to specify mode (test or demo)
+     */
     public static void main(String[] args) {
         if (args.length > 0) {
             if (args[0].toUpperCase().contains("TEST")) {

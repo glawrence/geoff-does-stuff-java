@@ -30,7 +30,14 @@ class CommandLineTest {
                 Arguments.of(new String[]{"--ip-address:192.168.1.1"}, Map.of("ip-address", "192.168.1.1")),
                 Arguments.of(new String[]{"/ip:192.168.1.1"}, Map.of("ip", "192.168.1.1")),
                 Arguments.of(new String[]{"/debug"}, Map.of("debug", "")),
-                Arguments.of(new String[]{"/ip:192.168.1.1", "/debug"}, Map.of("ip", "192.168.1.1", "debug", ""))
+                Arguments.of(new String[]{"debug"}, Map.of("debug", "")),
+                Arguments.of(new String[]{"mode:normal"}, Map.of("mode", "normal")),
+                Arguments.of(new String[]{"/ip:192.168.1.1", "/debug"}, Map.of("ip", "192.168.1.1", "debug", "")),
+                Arguments.of(new String[]{"-ip:192.168.1.1", "debug"}, Map.of("ip", "192.168.1.1", "debug", "")),
+                Arguments.of(new String[]{"--ip-address:192.168.1.1", "--mac-address:AB:02:CD:03:EF:04"},
+                        Map.of("ip-address", "192.168.1.1", "mac-address", "AB:02:CD:03:EF:04")),
+                Arguments.of(new String[]{"-ip:192.168.1.1", "//debug", "mode:normal", "/api-version:2"},
+                        Map.of("ip", "192.168.1.1", "debug", "", "mode", "normal", "api-version", "2"))
         );
     }
 }

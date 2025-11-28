@@ -25,23 +25,24 @@ public class CommandLine {
      * @return a map of key/value pairs
      */
     public static Map<String, String> processArgs(String[] args) {
-        HashMap<String, String> arguments = new HashMap<>(args.length);
+        Map<String, String> arguments = new HashMap<>(args.length);
         for (String arg : args) {
             processArgument(arg, arguments);
         }
         return arguments;
     }
 
-    private static void processArgument(String first, HashMap<String, String> arguments) {
-        if (PREFIX_CHARS.contains(first.charAt(0))) {
-            String argument = first.substring(1);
-            if (PREFIX_CHARS.contains(argument.charAt(0))) { // handle -- arguments
+    private static void processArgument(String arg, Map<String, String> arguments) {
+        String argument = arg;
+        if (PREFIX_CHARS.contains(argument.charAt(0))) {
+            argument = argument.substring(1);
+            if (PREFIX_CHARS.contains(argument.charAt(0))) { // handle -- or // arguments
                 argument = argument.substring(1);
             }
-            String[] keyValue = argument.split(":", 2);
-            String key = keyValue[0];
-            String value = (keyValue.length > 1) ? keyValue[1] : "";
-            arguments.put(key, value);
         }
+        String[] keyValue = argument.split(":", 2);
+        String key = keyValue[0];
+        String value = (keyValue.length > 1) ? keyValue[1] : "";
+        arguments.put(key, value);
     }
 }

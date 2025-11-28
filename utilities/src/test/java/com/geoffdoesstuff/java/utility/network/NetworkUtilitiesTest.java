@@ -1,5 +1,6 @@
-package com.geoffdoesstuff.java.utility;
+package com.geoffdoesstuff.java.utility.network;
 
+import com.geoffdoesstuff.java.utility.JavaSystemInfo;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

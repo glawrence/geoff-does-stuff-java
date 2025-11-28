@@ -1,4 +1,4 @@
-package com.geoffdoesstuff.java.utility;
+package com.geoffdoesstuff.java.utility.network;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -12,6 +12,7 @@ public class NetworkUtilities {
      * This is here to suppress JavaDoc complaining about not commenting the default constructor
      */
     private NetworkUtilities() {
+        throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
     }
 
     /**

@@ -20,7 +20,7 @@ class CommandLineTest {
         Map<String, String> actualArguments = CommandLine.processArgs(inputArgs);
 
         assertEquals(expectedArguments.size(), actualArguments.size());
-        expectedArguments.keySet().forEach(arg -> assertEquals(actualArguments.get(arg), expectedArguments.get(arg)));
+        expectedArguments.keySet().forEach(arg -> assertEquals(expectedArguments.get(arg), actualArguments.get(arg)));
     }
 
     private static Stream<Arguments> processArgs() {
@@ -31,13 +31,35 @@ class CommandLineTest {
                 Arguments.of(new String[]{"/ip:192.168.1.1"}, Map.of("ip", "192.168.1.1")),
                 Arguments.of(new String[]{"/debug"}, Map.of("debug", "")),
                 Arguments.of(new String[]{"debug"}, Map.of("debug", "")),
-                Arguments.of(new String[]{"mode:normal"}, Map.of("mode", "normal")),
+                Arguments.of(new String[]{"MODE:normal"}, Map.of("MODE", "normal")),
+                Arguments.of(new String[]{"Mode:normal"}, Map.of("Mode", "normal")),
                 Arguments.of(new String[]{"/ip:192.168.1.1", "/debug"}, Map.of("ip", "192.168.1.1", "debug", "")),
                 Arguments.of(new String[]{"-ip:192.168.1.1", "debug"}, Map.of("ip", "192.168.1.1", "debug", "")),
                 Arguments.of(new String[]{"--ip-address:192.168.1.1", "--mac-address:AB:02:CD:03:EF:04"},
                         Map.of("ip-address", "192.168.1.1", "mac-address", "AB:02:CD:03:EF:04")),
-                Arguments.of(new String[]{"-ip:192.168.1.1", "//debug", "mode:normal", "/api-version:2"},
-                        Map.of("ip", "192.168.1.1", "debug", "", "mode", "normal", "api-version", "2"))
+                Arguments.of(new String[]{"-ip:192.168.1.1", "//DEBUG", "mode:normal", "/api-version:2"},
+                        Map.of("ip", "192.168.1.1", "DEBUG", "", "mode", "normal", "api-version", "2")),
+                Arguments.of(new String[]{"--ip-address=192.168.1.1", "--mac-address=AB:02:CD:03:EF:04"},
+                        Map.of("ip-address", "192.168.1.1", "mac-address", "AB:02:CD:03:EF:04"))
+        );
+    }
+
+    @DisplayName("Test valid command line arguments, without case sensitivity")
+    @ParameterizedTest
+    @MethodSource
+    void processArgsCaseInsensitive(String[] inputArgs, Map<String, String> expectedArguments) {
+        Map<String, String> actualArguments = CommandLine.processArgs(inputArgs, true);
+
+        assertEquals(expectedArguments.size(), actualArguments.size());
+        expectedArguments.keySet().forEach(arg -> assertEquals(expectedArguments.get(arg), actualArguments.get(arg)));
+    }
+
+    private static Stream<Arguments> processArgsCaseInsensitive() {
+        return Stream.of(
+                Arguments.of(new String[]{"MODE:normal"}, Map.of("mode", "normal")),
+                Arguments.of(new String[]{"mode:normal"}, Map.of("mode", "normal")),
+                Arguments.of(new String[]{"Mode:normal"}, Map.of("mode", "normal")),
+                Arguments.of(new String[]{"moDE:normal"}, Map.of("mode", "normal"))
         );
     }
 }

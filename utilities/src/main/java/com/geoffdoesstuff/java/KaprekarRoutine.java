@@ -1,6 +1,9 @@
 package com.geoffdoesstuff.java;
 
+import com.geoffdoesstuff.java.utility.CommandLine;
+
 import java.util.Arrays;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -37,32 +40,9 @@ public class KaprekarRoutine {
      * @param args only first arg is used to specify mode (test or demo)
      */
     public static void main(String[] args) {
-        if (args.length > 0) {
-            if (args[0].toUpperCase().contains("TEST")) {
-                process(null);
-                process("");
-                process("123");
-                process("12345");
-                process("aaaa");
-                process("1111");
-                process("3524");
-            } else if (args[0].toUpperCase().contains("DEMO")) {
-                process("0213");
-                process("0911");
-                process("0909");
-                process("0990");
-                process("9009");
-                process("9090");
-                process("9900");
-                process("9991");
-                process("2221");
-                process("7648");
-                process("2413");
-            } else {
-                System.err.println("Unknown argument - " + args[0]);
-                System.out.println("Please try \"test\" or \"demo\"");
-            }
-        } else {
+        Map<String, String> arguments = CommandLine.processArgs(args, true);
+
+        if (arguments.isEmpty()) {
             Scanner keyboard = new Scanner(System.in);
             do {
                 displayMenu();
@@ -75,6 +55,32 @@ public class KaprekarRoutine {
                 }
             } while (true);
             keyboard.close();
+        } else {
+            if ((arguments.size() == 1) && arguments.containsKey("test")) {
+                process(null);
+                process("");
+                process("123");
+                process("12345");
+                process("aaaa");
+                process("0001");
+                process("1111");
+                process("3524");
+            } else if ((arguments.size() == 1) && arguments.containsKey("demo")) {
+                process("0213");
+                process("0911");
+                process("0909");
+                process("0990");
+                process("9009");
+                process("9090");
+                process("9900");
+                process("9991");
+                process("2221");
+                process("7648");
+                process("2413");
+            } else {
+                System.err.println("Unknown arguments found. " + CommandLine.getFormattedArguments(arguments));
+                System.out.println("Please use \"test\" or \"demo\", alternatively don't specify any argument for interactive mode.");
+            }
         }
     }
 
@@ -109,7 +115,7 @@ public class KaprekarRoutine {
         if (valid) {
             try {
                 int integer = Integer.parseInt(number);
-                char[] digits = Integer.toString(integer).toCharArray();
+                char[] digits = String.format("%04d", integer).toCharArray();
                 if ((digits[0] == digits[1]) && (digits[1] == digits[2]) && (digits[2] == digits[3])) {
                     valid = false;
                 }

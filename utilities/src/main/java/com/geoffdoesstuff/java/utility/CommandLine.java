@@ -7,7 +7,7 @@ import java.util.Set;
 /**
  * A Utility class to help process command line arguments. They are processed into a key/value paid map. Some arguments
  * will have no value, and thus their presence in the map indicates they were on the command line.
- * When working with the Map<String, String> returned by processArgs() you can use arguments.containsKey("test") which
+ * When working with the Map&lt;String, String&gt; returned by processArgs() you can use arguments.containsKey("test") which
  * will check if the argument "test" has been passed, however it does not differentiate between "test" and "test=on".
  * There are a number of supported ways to specify the same command line option, as follows:
  * <pre>

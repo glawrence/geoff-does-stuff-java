@@ -129,6 +129,13 @@ public class JavaSystemInfo {
 	public static boolean isAtLeastJava25() {
 		return (System.getProperty("java.version", DEFAULT_VERSION).compareTo("25") >= 0);
 	}
+    /**
+     * Check if we are on Java 25 or higher, returning true if we are
+     * @return boolean
+     */
+    public static boolean isAtLeastJava26() {
+        return (System.getProperty("java.version", DEFAULT_VERSION).compareTo("26") >= 0);
+    }
 	/**
 	 * Output the Java Version demo
 	 */

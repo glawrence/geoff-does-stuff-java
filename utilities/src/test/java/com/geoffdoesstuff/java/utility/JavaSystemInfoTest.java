@@ -28,10 +28,11 @@ class JavaSystemInfoTest {
 		assertTrue(JavaSystemInfo.isAtLeastJava19());
 		assertTrue(JavaSystemInfo.isAtLeastJava20());
 		assertTrue(JavaSystemInfo.isAtLeastJava21());
-		assertFalse(JavaSystemInfo.isAtLeastJava22());
-		assertFalse(JavaSystemInfo.isAtLeastJava23());
-		assertFalse(JavaSystemInfo.isAtLeastJava24());
-		assertFalse(JavaSystemInfo.isAtLeastJava25());
+        assertTrue(JavaSystemInfo.isAtLeastJava22());
+        assertTrue(JavaSystemInfo.isAtLeastJava23());
+        assertTrue(JavaSystemInfo.isAtLeastJava24());
+        assertTrue(JavaSystemInfo.isAtLeastJava25());
+        assertFalse(JavaSystemInfo.isAtLeastJava26());
 	}
 
 	@Test

@@ -45,7 +45,7 @@ test {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+        languageVersion = JavaLanguageVersion.of(25)
     }
     // generate JavaDoc and put into a jar file
     withJavadocJar()

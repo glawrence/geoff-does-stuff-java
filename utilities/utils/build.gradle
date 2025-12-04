@@ -3,11 +3,7 @@ plugins {
 }
 
 application {
-    mainClass = 'com.geoffdoesstuff.java.MainDemoApp'
-}
-
-run {
-    standardInput = System.in
+    mainClass = 'com.geoffdoesstuff.java.WakeOnLan'
 }
 
 dependencies {

@@ -1,7 +1,7 @@
 # Geoff Does Stuff (Java)
 This is a Java project to accompany Geoff Does Stuff. Some things are easier to show in code with comments than to document with code snippets. The aim of this project is to show how some Java things work.
 
-It is worth adding that [JUnit 5](https://junit.org/junit5/) is being used as well as [Gradle Build Tool](https://gradle.org/).
+It is worth adding that [JUnit](https://junit.org/) is being used as well as [Gradle](https://gradle.org/).
 
 This project is primarily hosted on GitLab at [Geoff Lawrence / Geoff Does Stuff - Java](https://gitlab.com/glawrence/geoff-does-stuff-java) but is configured with [Repository Mirroring](https://docs.gitlab.com/ee/user/project/repository/repository_mirroring.html) to automatically mirror the project to [glawrence/geoff-does-stuff-java](https://github.com/glawrence/geoff-does-stuff-java) on GitHub.
 
@@ -39,6 +39,8 @@ I have been using these as two separate commands on Windows, so starting with
 Followed by
 
 `gradlew run --console plain`
+
+`gradlew :utilities:utils:run --args="--ip-address=192.168.1.1 --mac-address=AB:CD:EF:01:02:03"`
 
 or
 

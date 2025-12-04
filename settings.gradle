@@ -1,2 +1,2 @@
 rootProject.name = 'geoff-does-stuff-java'
-include('utilities', 'demo')
+include('utilities:library', 'utilities:utils', 'demo')

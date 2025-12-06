@@ -35,6 +35,16 @@ public class TextUtilities {
     }
 
     /**
+     * Utility method to help test for something that contains text, in other words it is not null, empty or just
+     * whitespace.
+     * @param text input String object
+     * @return boolean
+     */
+    public static boolean isNotBlank(String text) {
+        return ( ! isNullOrBlank(text) );
+    }
+
+    /**
      * Convert the input String to be all the same outputChar character. The only validation is null checking.
      * @param input input string to convert
      * @param outputChar single character string

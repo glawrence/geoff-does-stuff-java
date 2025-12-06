@@ -40,7 +40,7 @@ Followed by
 
 `gradlew run --console plain`
 
-`gradlew :utilities:utils:run --args="--ip-address=192.168.1.1 --mac-address=AB:CD:EF:01:02:03"`
+`gradlew :utilities:utils:run --console plain --args="--ip-address=192.168.1.1 --mac-address=AB:CD:EF:01:02:03"`
 
 or
 

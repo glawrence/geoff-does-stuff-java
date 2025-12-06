@@ -37,23 +37,24 @@ public class WakeOnLan {
 
         System.out.println("Starting Wake on LAN utility");
         Map<String, String> cmdLineArguments = CommandLine.processArgs(args);
-        System.out.println("  command line arguments: " + cmdLineArguments);
+        System.out.println(CommandLine.getFormattedArguments(cmdLineArguments));
 
-        if (cmdLineArguments.size() != 2) {
-            displayIncorrectCommandLineError();
-        } else {
+        if (cmdLineArguments.size() == 2) {
             String ipAddress = cmdLineArguments.get(CMD_LINE_IP_ADDRESS);
-            if (TextUtilities.isNullOrBlank(ipAddress)) {
-                displayIncorrectCommandLineError();
-            } else {
-                if (cmdLineArguments.containsKey(CMD_LINE_MAC_ADDRESS)) {
-                    startHost(cmdLineArguments.get(CMD_LINE_MAC_ADDRESS), ipAddress);
+            if (TextUtilities.isNotBlank(ipAddress)) {
+                String macAddress = cmdLineArguments.get(CMD_LINE_MAC_ADDRESS);
+                if (TextUtilities.isNotBlank(macAddress)) {
+                    startHost(macAddress, ipAddress);
                 } else if (cmdLineArguments.containsKey(CMD_LINE_DOWN)) {
                     pingUntilShutdown(ipAddress);
                 } else {
                     displayIncorrectCommandLineError();
                 }
+            } else {
+                displayIncorrectCommandLineError();
             }
+        } else {
+            displayIncorrectCommandLineError();
         }
     }
 

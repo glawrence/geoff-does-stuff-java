@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -60,6 +61,40 @@ class CommandLineTest {
                 Arguments.of(new String[]{"mode:normal"}, Map.of("mode", "normal")),
                 Arguments.of(new String[]{"Mode:normal"}, Map.of("mode", "normal")),
                 Arguments.of(new String[]{"moDE:normal"}, Map.of("mode", "normal"))
+        );
+    }
+
+    @DisplayName("Test checkArgs(), success cases")
+    @ParameterizedTest
+    @MethodSource
+    void checkArgs_Successes(Map<String, String> arguments, List<String> expected, boolean caseSensitive) {
+        assertTrue(CommandLine.checkArgs(arguments, expected, caseSensitive));
+    }
+
+    private static Stream<Arguments> checkArgs_Successes() {
+        return Stream.of(
+                Arguments.of(Map.of("mode", "normal"), List.of("mode"), true),
+                Arguments.of(Map.of("mode", "normal"), List.of("mode"), false),
+                Arguments.of(Map.of("mode", "normal", "debug", ""), List.of("Mode", "Debug"), false),
+                Arguments.of(Map.of("mode", "normal", "debug", ""), List.of("mode", "debug"), true)
+        );
+    }
+
+    @DisplayName("Test checkArgs(), failure cases")
+    @ParameterizedTest
+    @MethodSource
+    void checkArgs_Failures(Map<String, String> arguments, List<String> expected, boolean caseSensitive) {
+        assertFalse(CommandLine.checkArgs(arguments, expected, caseSensitive));
+    }
+
+    private static Stream<Arguments> checkArgs_Failures() {
+        return Stream.of(
+                Arguments.of(null, List.of("Mode"), true),
+                Arguments.of(Map.of("mode", "normal"), null, true),
+                Arguments.of(Collections.emptyMap(), Collections.emptyList(), true),
+                Arguments.of(Map.of("mode", "normal"), List.of("Mode"), true),
+                Arguments.of(Map.of("mode", "normal", "debug", ""), List.of("Mode"), false),
+                Arguments.of(Map.of("mode", "normal"), List.of("Mode", "debug"), false)
         );
     }
 }

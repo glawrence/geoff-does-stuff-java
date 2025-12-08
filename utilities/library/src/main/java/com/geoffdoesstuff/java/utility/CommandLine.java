@@ -1,7 +1,10 @@
 package com.geoffdoesstuff.java.utility;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -36,6 +39,7 @@ public class CommandLine {
 
     /**
      * Process the command line arguments into a map of key value pairs.
+     *
      * @param args the args from the main() method
      * @return a map of key/value pairs
      */
@@ -46,7 +50,8 @@ public class CommandLine {
     /**
      * This version of processArgs() method is useful when case sensitivity in the arguments is not needed, all the
      * keys are converted to lowercase, if required.
-     * @param args the args from the main() method
+     *
+     * @param args          the args from the main() method
      * @param lowerCaseKeys if true convert all keys to lowercase
      * @return a map of key/value pairs
      */
@@ -56,6 +61,38 @@ public class CommandLine {
             processArgument(arg, arguments, lowerCaseKeys);
         }
         return arguments;
+    }
+
+    /**
+     * Examine the arguments and check if the required arguments are there, and that there are no extras.
+     *
+     * @param arguments     the processed command line arguments from processArgs()
+     * @param required      list of required arguments
+     * @param caseSensitive enable or disable case sensitivity
+     * @return whether the required args are present or not
+     */
+    public static boolean checkArgs(Map<String, String> arguments, List<String> required, boolean caseSensitive) {
+        if (Objects.isNull(arguments) || Objects.isNull(required)) {
+            return false;
+        }
+        if (required.isEmpty()) {
+            return false;
+        }
+        if (required.size() != arguments.size()) {
+            return false;
+        }
+
+        boolean result = true;
+        List<String> keys = new ArrayList<>(arguments.size());
+        arguments.keySet().forEach(key -> keys.add(caseSensitive ? key : key.toLowerCase()));
+        for (String item: required) {
+            if (caseSensitive) {
+                result = (result && (keys.contains(item)));
+            } else {
+                result = (result && (keys.contains(item.toLowerCase())));
+            }
+        }
+        return result;
     }
 
     /**

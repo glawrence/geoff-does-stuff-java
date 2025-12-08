@@ -4,11 +4,11 @@ import com.geoffdoesstuff.java.utility.CommandLine;
 import com.geoffdoesstuff.java.utility.JavaSystemInfo;
 import com.geoffdoesstuff.java.utility.ProcessExecutionResult;
 import com.geoffdoesstuff.java.utility.ProcessExecutionUtility;
-import com.geoffdoesstuff.java.utility.TextUtilities;
 import com.geoffdoesstuff.java.utility.network.WoLMagicPacket;
 
 import java.io.IOException;
 import java.net.*;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,10 +18,11 @@ import java.util.Map;
  */
 public class WakeOnLan {
 
-    // this should be a command line argument, 20 is fine from sleep, but we need 40 for a cold start
-    private static final int MAX_PING_COUNT = 20;
+    // 20 is fine from sleep, but we need 40 for a cold start
+    private static final int DEFAULT_PING_COUNT = 20;
     private static final String CMD_LINE_MAC_ADDRESS = "mac-address";
     private static final String CMD_LINE_IP_ADDRESS = "ip-address";
+    private static final String CMD_LINE_PING_COUNT = "ping-count";
     private static final String CMD_LINE_DOWN = "down";
 
     private WakeOnLan() {
@@ -39,16 +40,25 @@ public class WakeOnLan {
         Map<String, String> cmdLineArguments = CommandLine.processArgs(args);
         System.out.println(CommandLine.getFormattedArguments(cmdLineArguments));
 
-        if (cmdLineArguments.size() == 2) {
-            String ipAddress = cmdLineArguments.get(CMD_LINE_IP_ADDRESS);
-            if (TextUtilities.isNotBlank(ipAddress)) {
-                String macAddress = cmdLineArguments.get(CMD_LINE_MAC_ADDRESS);
-                if (TextUtilities.isNotBlank(macAddress)) {
-                    startHost(macAddress, ipAddress);
-                } else if (cmdLineArguments.containsKey(CMD_LINE_DOWN)) {
-                    pingUntilShutdown(ipAddress);
-                } else {
-                    displayIncorrectCommandLineError();
+        if (cmdLineArguments.size() == 2 || cmdLineArguments.size() == 3) {
+            boolean sendWol = CommandLine.checkArgs(cmdLineArguments, List.of(CMD_LINE_IP_ADDRESS, CMD_LINE_MAC_ADDRESS), false);
+            boolean checkDown = CommandLine.checkArgs(cmdLineArguments, List.of(CMD_LINE_IP_ADDRESS, CMD_LINE_DOWN), false);
+            boolean sendWolCount = CommandLine.checkArgs(cmdLineArguments, List.of(CMD_LINE_IP_ADDRESS, CMD_LINE_MAC_ADDRESS, CMD_LINE_PING_COUNT), false);
+            boolean checkDownCount = CommandLine.checkArgs(cmdLineArguments, List.of(CMD_LINE_IP_ADDRESS, CMD_LINE_DOWN, CMD_LINE_PING_COUNT), false);
+
+            if (sendWol || checkDown || sendWolCount || checkDownCount) {
+                String ipAddress = cmdLineArguments.get(CMD_LINE_IP_ADDRESS);
+                int pingCount = DEFAULT_PING_COUNT;
+                if (sendWolCount || checkDownCount) {
+                    pingCount = Integer.parseInt(cmdLineArguments.get(CMD_LINE_PING_COUNT));
+                }
+
+                if (sendWol || sendWolCount) {
+                    String macAddress = cmdLineArguments.get(CMD_LINE_MAC_ADDRESS);
+                    startHost(macAddress, ipAddress, pingCount);
+                }
+                if (checkDown || checkDownCount) {
+                    pingUntilShutdown(ipAddress, pingCount);
                 }
             } else {
                 displayIncorrectCommandLineError();
@@ -62,10 +72,11 @@ public class WakeOnLan {
         System.err.println("ERROR: please specify a command line option");
         System.err.println("       --mac-address=FF:FF:FF:FF:FF:FF --ip-address=192.168.1.1  -  send Wake-on-LAN packet and check it started");
         System.err.println("       --down --ip-address=192.168.1.1  -  this will test if the host is down");
+        System.err.println("       --ping-count=20  -  an optional argument to specify how many pings to use, where 20 is the default");
         System.err.println("       Note: you have to use one option or the other, not both");
     }
 
-    private static void startHost(String inputMacAddress, String targetIpAddress) {
+    private static void startHost(String inputMacAddress, String targetIpAddress, int pingCount) {
         String macAddress = inputMacAddress;
 
         System.out.println("Here we go.....");
@@ -79,12 +90,12 @@ public class WakeOnLan {
             return;
         }
 
-        pingUntilResponding(targetIpAddress);
+        pingUntilResponding(targetIpAddress, pingCount);
     }
 
-    private static void pingUntilShutdown(String host) {
+    private static void pingUntilShutdown(String host, int pingCount) {
         boolean running = true;
-        for (int i = 1; i <= MAX_PING_COUNT; i++) {
+        for (int i = 1; i <= pingCount; i++) {
             ProcessExecutionResult processExecutionResult = getPingProcessExecutionResult(host);
             if (processExecutionResult.success()) {
                 System.out.printf("%2d: %s is running%n", i, host);
@@ -106,9 +117,9 @@ public class WakeOnLan {
         }
     }
 
-    private static void pingUntilResponding(String host) {
+    private static void pingUntilResponding(String host, int pingCount) {
         boolean started = false;
-        for (int i = 1; i <= MAX_PING_COUNT; i++) {
+        for (int i = 1; i <= pingCount; i++) {
             ProcessExecutionResult processExecutionResult = getPingProcessExecutionResult(host);
             if (processExecutionResult.success()) {
                 System.out.printf("%2d: %s has started%n", i, host);

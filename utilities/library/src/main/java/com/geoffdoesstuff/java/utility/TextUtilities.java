@@ -10,7 +10,7 @@ public class TextUtilities {
     private static final String REGEX_ANY_CHARACTER = ".";
 
     /**
-     * This is here to suppress JavaDoc complaining about not commenting the default constructor
+     * This is here to suppress Javadoc complaining about not commenting the default constructor
      */
     private TextUtilities() {
     }

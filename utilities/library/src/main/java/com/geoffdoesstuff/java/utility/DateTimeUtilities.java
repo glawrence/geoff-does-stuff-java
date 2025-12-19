@@ -60,4 +60,58 @@ public class DateTimeUtilities {
         return Objects.nonNull(parseLocalDate(input));
     }
 
+    /**
+     * Check the base date is after or the same as the comparing to date.
+     *
+     * @param fromDate base date
+     * @param toDate comparing to date
+     * @return comparison result
+     */
+    public static boolean afterOrEqual(LocalDate fromDate, LocalDate toDate) {
+        return (toDate.isAfter(fromDate) || toDate.isEqual(fromDate));
+    }
+
+    /**
+     * Check the base date is before the comparing to date.
+     *
+     * @param fromDate base date
+     * @param toDate comparing to date
+     * @return comparison result
+     */
+    public static boolean before(LocalDate fromDate, LocalDate toDate) {
+        return !(afterOrEqual(fromDate, toDate));
+    }
+
+    /**
+     * Check the base date is before or the same as the comparing to date.
+     *
+     * @param fromDate base date
+     * @param toDate comparing to date
+     * @return comparison result
+     */
+    public static boolean beforeOrEqual(LocalDate fromDate, LocalDate toDate) {
+        return (toDate.isBefore(fromDate) || toDate.isEqual(fromDate));
+    }
+
+    /**
+     * Check the base date is after the comparing to date.
+     *
+     * @param fromDate base date
+     * @param toDate comparing to date
+     * @return comparison result
+     */
+    public static boolean after(LocalDate fromDate, LocalDate toDate) {
+        return !(beforeOrEqual(fromDate, toDate));
+    }
+
+    /**
+     * Check the base date is before the comparing to date, but with a different technique to before().
+     *
+     * @param fromDate base date
+     * @param toDate comparing to date
+     * @return comparison result
+     */
+    public static boolean beforeAlt(LocalDate fromDate, LocalDate toDate) {
+        return (toDate.isBefore(fromDate));
+    }
 }

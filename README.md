@@ -27,7 +27,7 @@ Alternatively to run a specific demo you can use the following:
 
 After switching to the "application" plugin, instead of "java" and adding some config I was able to use the following, which is a simpler version of the original command above:
 
-`./gradlew run --console plain`
+`./gradlew :demo:run --console plain`
 
 The benefit here is that if necessary Gradle will recompile before running.
 
@@ -38,7 +38,7 @@ I have been using these as two separate commands on Windows, so starting with
 
 Followed by
 
-`gradlew run --console plain`
+`gradlew :demo:run --console plain`
 
 `gradlew :utilities:utils:run --console plain --args="--ip-address=192.168.1.1 --mac-address=AB:CD:EF:01:02:03"`
 
@@ -54,8 +54,8 @@ However, if Java is not on the path then this works if JAVA_HOME is set:
 
 `%JAVA_HOME%\bin\java -jar .\build\libs\geoff-does-stuff-java-0.1.0.jar`
 
-## Reading JavaDoc
-When working on the JavaDoc you don't need to do a complete build by running everything including the unit tests. Here are some instructions for building the JavaDoc and then viewing it in the default browser.
+## Reading Javadoc
+When working on the Javadoc you don't need to do a complete build by running everything including the unit tests. Here are some instructions for building the Javadoc and then viewing it in the default browser.
 
 ### Windows
 

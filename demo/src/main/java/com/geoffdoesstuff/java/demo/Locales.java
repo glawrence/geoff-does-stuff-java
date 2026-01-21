@@ -48,6 +48,7 @@ public class Locales {
 		locales.displayLocaleDetails(Locale.forLanguageTag("th-TH-u-nu-thai-x-lvariant-TH"));
 		locales.displayLocaleDetails(Locale.forLanguageTag("th-THai-TH"));
 		locales.displayLocaleDetails(Locale.forLanguageTag("th-TH-TH-#u-nu-thai"));
+		DemoUtilities.outputTitle("Japan", true);
 		locales.displayLocaleDetails(Locale.forLanguageTag("ja-JP-JP-#u-ca-japanese"));
 
 		DemoUtilities.outputTitle("Display Locale name if different Locale");
@@ -56,15 +57,16 @@ public class Locales {
 		System.out.println("Example: " + Locale.CANADA.getDisplayName(Locale.ENGLISH));
 		System.out.println("Example: " + Locale.CANADA_FRENCH.getDisplayName(Locale.FRENCH));
 		System.out.println("Example: " + Locale.CANADA_FRENCH.getDisplayName(Locale.ENGLISH));
+		System.out.println("Example: " + Locale.UK.getDisplayName(Locale.CHINESE));
 		System.out.println("Example: " + Locale.FRANCE.getDisplayName(Locale.CHINESE));
 		System.out.println("Example: " + Locale.KOREA.getDisplayName(Locale.FRENCH));
 		System.out.println("Example: " + Locale.KOREA.getDisplayName(Locale.FRENCH));
 	}
 
-    /**
+	/**
 	 * Display all the detail of a given Locale
-     * @param locale locale to display
-     */
+	 * @param locale locale to display
+	 */
 	public void displayLocaleDetails(Locale locale) {
 		System.out.printf("Language Tag: [%s]%n", locale.toLanguageTag());
 		System.out.printf("  Display Name: [%s]%n", locale.getDisplayName());
@@ -129,7 +131,7 @@ public class Locales {
 		myLocales.put("France", Locale.FRANCE);
 		myLocales.put("Holiday", Locale.forLanguageTag("Welsh"));
 
-        myLocales.forEach((s, t) -> System.out.println("In " + s + " we speak " + t.getDisplayLanguage()));
+		myLocales.forEach((s, t) -> System.out.println("In " + s + " we speak " + t.getDisplayLanguage()));
 		System.out.println("My work: " + myLocales.getOrDefault("Work", Locale.CANADA).getDisplayName());
 		System.out.println("My home: " + myLocales.getOrDefault("Home", Locale.CANADA).getDisplayName());
 	}

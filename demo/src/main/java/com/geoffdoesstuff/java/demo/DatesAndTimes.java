@@ -1,11 +1,12 @@
 package com.geoffdoesstuff.java.demo;
 
 import com.geoffdoesstuff.java.demo.datesandtimes.FormattingDatesAndTimes;
+import com.geoffdoesstuff.java.utility.DateTimeUtilities;
 import com.geoffdoesstuff.java.utility.DemoUtilities;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+import java.util.List;
 
 /**
  * Date and Time demo.
@@ -13,7 +14,7 @@ import java.time.format.DateTimeParseException;
 public class DatesAndTimes {
 
 	/**
-	 * This is here to suppress JavaDoc complaining about not commenting the default constructor
+	 * This is here to suppress Javadoc complaining about not commenting the default constructor
 	 */
 	private DatesAndTimes() {
 	}
@@ -42,31 +43,20 @@ public class DatesAndTimes {
 		datesAndTimes.parsingDemo();
 	}
 
-	private void parsingDemo() {
-		String input = "2021-12-21";
-		System.out.printf("Parsing %s into LocalDate gives %s%n", input, parseLocalDate(input));
-		input = "2021-13-A";
-		System.out.printf("Parsing %s into LocalDate gives %s%n", input, parseLocalDate(input));
-		boolean result = isValidLocalDate(null);
-		System.out.println(result);
-	}
+	/**
+	 * The code for this seemed useful, so has been moved to the Utilities Library
+	 */
+    private void parsingDemo() {
+		List<String> inputDateStrings = List.of("2021-12-21", "21 12 2021", "21-12-2021",
+				"21 December 2021", "21 Dec 2021", "21-Dec-2021", "2021-13-A", "");
 
-	private LocalDate parseLocalDate(String input) {
-		try {
-			return LocalDate.parse(input);
-		} catch (DateTimeParseException dtpe) {
-			System.out.printf("Error parsing '%s' to LocalDate with message \"%s\"%n", dtpe.getParsedString(), dtpe.getMessage());
-			return null;
-		}
-	}
-
-	private boolean isValidLocalDate(String input) {
-		try {
-			LocalDate.parse(input);
-			return true;
-		} catch (DateTimeParseException | NullPointerException e) {
-			return false;
-		}
+		inputDateStrings.forEach(input -> {
+			if (DateTimeUtilities.isValidLocalDate(input)) {
+				System.out.printf("Parsing %s into LocalDate gives %s%n", input, DateTimeUtilities.parseLocalDate(input));
+			} else {
+				System.out.printf("Parsing %s into LocalDate fails, it is not a valid date%n", input);
+			}
+		});
 	}
 
 	/**
@@ -111,30 +101,19 @@ public class DatesAndTimes {
 		System.out.println("Compare " + today.isBefore(laterToday));
 		System.out.println("Compare " + today.isEqual(laterToday));
 		DemoUtilities.outputTitle("afterOrEqual", true);
-		System.out.println("After or Equal " + afterOrEqual(today, laterToday) + String.format(", from %s to %s", today, laterToday));
-		System.out.println("After or Equal " + afterOrEqual(today, yesterday) + String.format(", from %s to %s", today, yesterday));
-		System.out.println("After or Equal " + afterOrEqual(today, tomorrow) + String.format(", from %s to %s", today, tomorrow));
+		System.out.println("After or Equal " + DateTimeUtilities.afterOrEqual(today, laterToday) + String.format(", from %s to %s", today, laterToday));
+		System.out.println("After or Equal " + DateTimeUtilities.afterOrEqual(today, yesterday) + String.format(", from %s to %s", today, yesterday));
+		System.out.println("After or Equal " + DateTimeUtilities.afterOrEqual(today, tomorrow) + String.format(", from %s to %s", today, tomorrow));
 		DemoUtilities.outputTitle("before", true);
-		System.out.println("After or Equal " + before(today, laterToday) + String.format(", from %s to %s", today, laterToday));
-		System.out.println("After or Equal " + before(today, yesterday) + String.format(", from %s to %s", today, yesterday));
-		System.out.println("After or Equal " + before(today, tomorrow) + String.format(", from %s to %s", today, tomorrow));
+		System.out.println("After or Equal " + DateTimeUtilities.before(today, laterToday) + String.format(", from %s to %s", today, laterToday));
+		System.out.println("After or Equal " + DateTimeUtilities.before(today, yesterday) + String.format(", from %s to %s", today, yesterday));
+		System.out.println("After or Equal " + DateTimeUtilities.before(today, tomorrow) + String.format(", from %s to %s", today, tomorrow));
 		DemoUtilities.outputTitle("beforeAlt", true);
-		System.out.println("After or Equal " + beforeAlt(today, laterToday) + String.format(", from %s to %s", today, laterToday));
-		System.out.println("After or Equal " + beforeAlt(today, yesterday) + String.format(", from %s to %s", today, yesterday));
-		System.out.println("After or Equal " + beforeAlt(today, tomorrow) + String.format(", from %s to %s", today, tomorrow));
+		System.out.println("After or Equal " + DateTimeUtilities.beforeAlt(today, laterToday) + String.format(", from %s to %s", today, laterToday));
+		System.out.println("After or Equal " + DateTimeUtilities.beforeAlt(today, yesterday) + String.format(", from %s to %s", today, yesterday));
+		System.out.println("After or Equal " + DateTimeUtilities.beforeAlt(today, tomorrow) + String.format(", from %s to %s", today, tomorrow));
 	}
 
-	private boolean afterOrEqual(LocalDate fromDate, LocalDate toDate) {
-		return (toDate.isAfter(fromDate) || toDate.isEqual(fromDate));
-	}
-
-	private boolean before(LocalDate fromDate, LocalDate toDate) {
-		return !(toDate.isAfter(fromDate) || toDate.isEqual(fromDate));
-	}
-
-	private boolean beforeAlt(LocalDate fromDate, LocalDate toDate) {
-		return (fromDate.isBefore(toDate));
-	}
 
 	private void unixTimestamps() {
 		LocalDateTime current = LocalDateTime.now();

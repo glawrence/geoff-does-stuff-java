@@ -29,7 +29,7 @@ import java.util.Scanner;
 public class KaprekarRoutine {
 
 	/**
-	 * This is here to suppress JavaDoc complaining about not commenting the default constructor
+	 * This is here to suppress Javadoc complaining about not commenting the default constructor
 	 */
 	private KaprekarRoutine() {
 	}

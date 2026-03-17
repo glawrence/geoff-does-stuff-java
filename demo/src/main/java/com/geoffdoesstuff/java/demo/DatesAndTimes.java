@@ -13,6 +13,8 @@ import java.util.List;
  */
 public class DatesAndTimes {
 
+	private static final ZoneId UTC_ZONE_ID = ZoneId.of("UTC");
+
 	/**
 	 * This is here to suppress Javadoc complaining about not commenting the default constructor
 	 */
@@ -144,6 +146,8 @@ public class DatesAndTimes {
 		System.out.println("Instant.now()              : " + now);
 		LocalDateTime gjl = LocalDateTime.ofInstant(now, ZoneId.systemDefault());
 		System.out.println("Now in current timezone    : " + gjl);
+		gjl = LocalDateTime.ofInstant(now, UTC_ZONE_ID);
+		System.out.println("Now in UTC (UTC)           : " + gjl);
 		gjl = LocalDateTime.ofInstant(now, ZoneId.of("CET"));
 		System.out.println("Now in Europe (CET)        : " + gjl);
 		gjl = LocalDateTime.ofInstant(now, ZoneId.of("Asia/Kolkata"));
@@ -162,8 +166,8 @@ public class DatesAndTimes {
 
 	private void formattingExtra() {
 		System.out.println(getCurrentDateTime(""));
-		System.out.println(getCurrentDateTime("E MMM d HH:mm:ss yyyy O"));
-		System.out.println(getCurrentDateTime("E MMM d HH:mm:ss yyyy z zzzz"));
+		System.out.println(getCurrentDateTime("HH:mm:ss E d MMM yyyy O"));
+		System.out.println(getCurrentDateTime("HH:mm:ss E d MMM yyyy z zzzz"));
 		System.out.println(getCurrentDateTime("'The' DD 'day is' dd/MM/YYYY HH:mm:ss"));
 		System.out.println(getCurrentDateTime(DateTimeFormatter.RFC_1123_DATE_TIME));
 		System.out.println(getCurrentDateTime(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
@@ -175,7 +179,7 @@ public class DatesAndTimes {
 		String result = ZonedDateTime.now().format(dateTimeFormatter);
 		result += System.lineSeparator();
 		ZonedDateTime utc;
-		utc = ZonedDateTime.now(ZoneId.of("UTC"));
+		utc = ZonedDateTime.now(UTC_ZONE_ID);
 		result += " (UTC) " + utc.format(dateTimeFormatter);
 		return result;
 	}

@@ -47,6 +47,6 @@ public class Conversions {
 
     private static void displayIncorrectCommandLineError() {
         System.err.println("ERROR: please specify a command line option");
-        System.err.println("       --ms-timestamp=134415835700000000  -  convert number to human readable date/time");
+        System.err.println("       --ms-timestamp=134423611700000000  -  convert number to human readable date/time");
     }
 }

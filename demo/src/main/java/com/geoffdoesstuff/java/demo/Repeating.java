@@ -12,7 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Repeating {
 
     /**
-     * This is here to suppress JavaDoc complaining about not commenting the default constructor
+     * This is here to suppress Javadoc complaining about not commenting the default constructor
      */
     private Repeating() {
     }
@@ -23,9 +23,11 @@ public class Repeating {
      */
     public static void main(String[] args) {
         List<String> strings = List.of("One", "Two", "Three", "Four", "Five", "Six");
+        String[] stringsArray = {"One", "Two", "Three", "Four", "Five", "Six"};
 
         DemoUtilities.outputTitle("Classic for loop (basic)", true);
         classicForLoop(strings);
+        classicForLoop(stringsArray);
 
         DemoUtilities.outputTitle("New style for loop (enhanced)", true);
         newForLoop(strings);
@@ -52,6 +54,12 @@ public class Repeating {
     private static void classicForLoop(List<String> strings) {
         for (int index = 1; index <= strings.size(); index++) {
             System.out.println(index + " - " + strings.get(index-1));
+        }
+    }
+
+    private static void classicForLoop(String[] strings) {
+        for (int index = 0; index < strings.length; index++) {
+            System.out.println(index + " - " + strings[index]);
         }
     }
 

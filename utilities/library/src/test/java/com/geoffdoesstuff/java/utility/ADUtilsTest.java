@@ -23,6 +23,14 @@ class ADUtilsTest {
         assertEquals(
                 ZonedDateTime.of(2026, 3, 6, 9, 38, 28, 550163200, ZoneId.of("UTC")),
                 actualZonedDateTime);
+
+        longTimestamp = Long.parseLong("134423611700000000");
+        actualZonedDateTime = ADUtils.convertMsFileTimeStampToDate(longTimestamp);
+
+        assertEquals("2026-12-21T21:12:50Z[UTC]", actualZonedDateTime.toString());
+        assertEquals(
+                ZonedDateTime.of(2026, 12, 21, 21, 12, 50, 0, ZoneId.of("UTC")),
+                actualZonedDateTime);
     }
 
     @ParameterizedTest

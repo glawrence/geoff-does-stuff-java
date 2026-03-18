@@ -17,7 +17,13 @@ IF NOT EXIST %UTILS_JAR% (
 )
 
 SET /P MS_TIMESTAMP="Please enter MS Timestamp: "
+SET /P ADD_DAYS="Please enter days to add, or press enter to skip: "
 
-"%JAVA_HOME%\bin\java" -Dfile.encoding=UTF-8 -classpath %CLASSPATH% com.geoffdoesstuff.java.Conversions --ms-timestamp=%MS_TIMESTAMP%
+IF "%ADD_DAYS%"=="" (
+	"%JAVA_HOME%\bin\java" -Dfile.encoding=UTF-8 -classpath %CLASSPATH% com.geoffdoesstuff.java.Conversions --ms-timestamp=%MS_TIMESTAMP%
+) ELSE (
+	"%JAVA_HOME%\bin\java" -Dfile.encoding=UTF-8 -classpath %CLASSPATH% com.geoffdoesstuff.java.Conversions --ms-timestamp=%MS_TIMESTAMP% --add-days=%ADD_DAYS%
+)
+
 
 ENDLOCAL

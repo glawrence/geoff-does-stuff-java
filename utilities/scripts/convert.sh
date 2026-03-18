@@ -12,5 +12,10 @@ if [[ ! -f "$LIBRARY_JAR" ]] || [[ ! -f "$UTILS_JAR" ]]; then
 fi
 
 read -r -p 'Please enter MS Timestamp: ' MS_TIMESTAMP
+read -r -p 'Please enter days to add, or press enter to skip: ' ADD_DAYS
 
-$JAVA_HOME/bin/java -Dfile.encoding=UTF-8 -classpath $CLASSPATH com.geoffdoesstuff.java.Conversions --ms-timestamp=$MS_TIMESTAMP
+if [[ "$ADD_DAYS" == "" ]]; then
+  $JAVA_HOME/bin/java -Dfile.encoding=UTF-8 -classpath $CLASSPATH com.geoffdoesstuff.java.Conversions --ms-timestamp=$MS_TIMESTAMP
+else
+  $JAVA_HOME/bin/java -Dfile.encoding=UTF-8 -classpath $CLASSPATH com.geoffdoesstuff.java.Conversions --ms-timestamp=$MS_TIMESTAMP --add-days=$ADD_DAYS
+fi

@@ -25,5 +25,4 @@ IF "%ADD_DAYS%"=="" (
 	"%JAVA_HOME%\bin\java" -Dfile.encoding=UTF-8 -classpath %CLASSPATH% com.geoffdoesstuff.java.Conversions --ms-timestamp=%MS_TIMESTAMP% --add-days=%ADD_DAYS%
 )
 
-
 ENDLOCAL

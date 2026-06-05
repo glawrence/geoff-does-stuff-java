@@ -6,6 +6,7 @@ import com.geoffdoesstuff.java.utility.DemoUtilities;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -43,12 +44,74 @@ public class DatesAndTimes {
 		datesAndTimes.durationDemo();
 		DemoUtilities.outputTitle("Parsing");
 		datesAndTimes.parsingDemo();
+		DemoUtilities.outputTitle("Time Zones Using");
+		datesAndTimes.timeZoneDemo();
+		DemoUtilities.outputTitle("Time Zones");
+		datesAndTimes.timeZonesExpansion();
+	}
+
+	private void timeZonesExpansion() {
+		DemoUtilities.outputTitle("Natural Order", true);
+		ZoneId.SHORT_IDS.forEach((id, city) -> {
+			System.out.println(id + " maps to " + city);
+		});
+		DemoUtilities.outputTitle("Key Order", true);
+		ZoneId.SHORT_IDS.keySet()
+				.stream()
+				.sorted()
+				.forEach(key -> System.out.println(key + " maps to " + ZoneId.SHORT_IDS.get(key)));
+		DemoUtilities.outputTitle("Value Order", true);
+		ZoneId.SHORT_IDS.keySet()
+				.stream()
+				.sorted(Comparator.comparing(ZoneId.SHORT_IDS::get))
+				.forEach(key -> System.out.println(key + " maps to " + ZoneId.SHORT_IDS.get(key)));
+		DemoUtilities.outputTitle("Fixed Offset TimeZones", true);
+		ZoneId.getAvailableZoneIds().stream()
+				.filter(zone -> ZoneId.of(zone).getRules().isFixedOffset())
+				.sorted()
+				.forEach(System.out::println);
+		DemoUtilities.outputTitle("All of them!", true);
+		ZoneId.getAvailableZoneIds().stream()
+				.filter(zone -> ZoneId.of(zone).getRules().getStandardOffset(Instant.now()).getTotalSeconds() % (60*60) != 0)
+				.sorted()
+				.forEach(System.out::println);
+		DemoUtilities.outputTitle("Testing", true);
+		displayTimeZone(ZoneId.of("Asia/Kolkata"));
+		displayTimeZone(ZoneId.of("America/New_York"));
+		displayTimeZone(ZoneId.of("Canada/Newfoundland"));
+		displayTimeZone(UTC_ZONE_ID);
+		displayTimeZone(ZoneId.of("UTC", ZoneId.SHORT_IDS));
+		displayTimeZone(ZoneId.of("ECT", ZoneId.SHORT_IDS)); // European Central Time
+	}
+
+	private void displayTimeZone(ZoneId zone) {
+		System.out.println(zone);
+		double hours = zone.getRules().getStandardOffset(Instant.now()).getTotalSeconds() / 3600.0;
+		Duration duration = Duration.ofSeconds(zone.getRules().getStandardOffset(Instant.now()).getTotalSeconds());
+		String prefix = duration.isNegative() ? "-" : "+";
+		String zoneOffset = String.format("%s%02d:%02d", prefix, Math.abs(duration.toHours()), Math.abs(duration.toMinutesPart()));
+		System.out.println(" - offset duration = " + duration + ", or " + hours + " hours, or " + zoneOffset);
+		if (zone.getRules().isDaylightSavings(Instant.now())) {
+			System.out.println(" - daylight saving is on");
+		}
+	}
+
+	private void timeZoneDemo() {
+		ZonedDateTime current = ZonedDateTime.now();
+		System.out.println("Current Date/Time: " + current);
+		// these examples take the current time as the "instant" to convert to another time zone
+		System.out.println("Current Date/Time: " + current.withZoneSameInstant(UTC_ZONE_ID));
+		System.out.println("Current Date/Time: " + current.withZoneSameInstant(ZoneOffset.UTC));
+		System.out.println("Current Date/Time: " + current.withZoneSameInstant(ZoneId.of("Europe/Paris")));
+		System.out.println("Current Date/Time: " + current.withZoneSameInstant(ZoneId.of("Asia/Kolkata")));
+		ZoneId india = ZoneId.of("IST", ZoneId.SHORT_IDS);
+		System.out.println("Current Date/Time: " + current.withZoneSameInstant(india));
 	}
 
 	/**
 	 * The code for this seemed useful, so has been moved to the Utilities Library
 	 */
-    private void parsingDemo() {
+	private void parsingDemo() {
 		List<String> inputDateStrings = List.of("2021-12-21", "21 12 2021", "21-12-2021",
 				"21 December 2021", "21 Dec 2021", "21-Dec-2021", "2021-13-A", "");
 

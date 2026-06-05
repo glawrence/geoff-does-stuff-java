@@ -10,14 +10,24 @@ import java.util.List;
 import java.util.Map;
 import java.util.OptionalInt;
 
+/**
+ * Data conversion class, that can be used direct.
+ */
 public class Conversions {
 
     private static final String CMD_LINE_MS_TIMESTAMP = "ms-timestamp";
     private static final String CMD_LINE_ADD_DAYS = "add-days";
 
     /**
+     * This is here to suppress Javadoc complaining about not commenting the default constructor
+     */
+    private Conversions() {
+    }
+
+    /**
      * Input is number of 100-nanosecond intervals since 1 January 1601 UTC
      * Java base date is 1 January 1970
+     * @param args command line
      */
     public static void main(String[] args) {
         System.out.println("Data Conversion utility");

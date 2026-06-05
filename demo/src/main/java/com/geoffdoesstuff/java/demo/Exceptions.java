@@ -10,7 +10,7 @@ import java.util.Arrays;
 public class Exceptions {
 
 	/**
-	 * This is here to suppress JavaDoc complaining about not commenting the default constructor
+	 * This is here to suppress Javadoc complaining about not commenting the default constructor
 	 */
 	private Exceptions() {
 	}

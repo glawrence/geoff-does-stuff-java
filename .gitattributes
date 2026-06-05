@@ -1,0 +1,8 @@
+# Note: core.autocrlf should be false
+
+# set default for all text files to lf
+* text=auto eol=lf
+
+# override Windows files to be crlf
+*.bat text eol=crlf
+*.cmd text eol=crlf

@@ -6,20 +6,10 @@ plugins {
 group = 'com.geoffdoesstuff.java'
 version = '0.1.0'
 
-ext {
-    junitVersion = '6.1.0'
-}
-
 allprojects {
     repositories {
         mavenCentral()
     }
-}
-
-dependencies {
-    testImplementation(platform("org.junit:junit-bom:$junitVersion"))
-    testImplementation('org.junit.jupiter:junit-jupiter')
-    testRuntimeOnly('org.junit.platform:junit-platform-launcher')
 }
 
 test {

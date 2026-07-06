@@ -1,7 +1,7 @@
 # see https://docs.gradle.org/current/userguide/best_practices_dependencies.html
 
 [versions]
-junit = '6.1.0'
+junit = '6.1.1'
 
 [libraries]
 junit-bom = { module = "org.junit:junit-bom", version.ref = "junit" }

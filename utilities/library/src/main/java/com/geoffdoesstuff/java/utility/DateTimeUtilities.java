@@ -38,7 +38,7 @@ public class DateTimeUtilities {
             Arrays.stream(dateFormats).forEach(pattern -> {
                 try {
                     parsedLocalDate.set(LocalDate.parse(input, pattern));
-                } catch (Exception e) {}
+                } catch (Exception _) {}
             });
             return parsedLocalDate.get();
         } catch (DateTimeParseException dtpe) {

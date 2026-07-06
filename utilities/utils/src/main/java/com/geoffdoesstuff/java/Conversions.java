@@ -2,6 +2,7 @@ package com.geoffdoesstuff.java;
 
 import com.geoffdoesstuff.java.utility.ADUtils;
 import com.geoffdoesstuff.java.utility.CommandLine;
+import com.geoffdoesstuff.java.utility.TextUtilities;
 
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
@@ -50,9 +51,10 @@ public class Conversions {
                 System.out.println(" - " + localDateTime.format(dateTimeFormatter));
                 OptionalInt daysToAdd = getDaysToAdd(cmdLineArguments);
                 if (daysToAdd.isPresent()) {
-                    System.out.printf(" - %s with %s day(s) added%n",
+                    long numDays = Long.parseLong(cmdLineArguments.get(CMD_LINE_ADD_DAYS));
+                    System.out.printf(" - %s with %s added%n",
                             localDateTime.plusDays(daysToAdd.getAsInt()).format(dateTimeFormatter),
-                            cmdLineArguments.get(CMD_LINE_ADD_DAYS));
+                            TextUtilities.getNumberWithWord(numDays, "day"));
                     System.out.println("Done");
                 }
             } else {

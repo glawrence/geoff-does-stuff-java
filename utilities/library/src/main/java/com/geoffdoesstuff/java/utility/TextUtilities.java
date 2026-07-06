@@ -1,5 +1,7 @@
 package com.geoffdoesstuff.java.utility;
 
+import java.text.ChoiceFormat;
+import java.text.MessageFormat;
 import java.util.*;
 
 /**
@@ -7,6 +9,9 @@ import java.util.*;
  */
 public class TextUtilities {
 
+    /**
+     * Match any character, except new-lines, and "return" once per character
+     */
     private static final String REGEX_ANY_CHARACTER = ".";
 
     /**
@@ -45,7 +50,27 @@ public class TextUtilities {
     }
 
     /**
+     * Shortcut of call to convertToRepeatedCharacter() with outputChar set to ' ', a simple convenience method.
+     * @param input input string to convert
+     * @return String
+     */
+    public static String convertToSpaces(String input) {
+        return convertToRepeatedCharacter(input, ' ');
+    }
+
+    /**
+     * Shortcut of call to convertToRepeatedCharacter() with outputChar set to '-', a simple convenience method.
+     * @param input input string to convert
+     * @return String
+     */
+    public static String convertToHyphens(String input) {
+        return convertToRepeatedCharacter(input, '-');
+    }
+
+    /**
      * Convert the input String to be all the same outputChar character. The only validation is null checking.
+     * Processes line terminating characters, but the Windows \r\n will convert to two output characters as
+     * technically it is two input characters.
      * @param input input string to convert
      * @param outputChar single character string
      * @return String
@@ -65,6 +90,7 @@ public class TextUtilities {
     /**
      * Convert input String to be multiple copies of the outputChar to the same length as the input String.
      * The only validation is null checking and outputChar length checking.
+     * Will ignore line terminating characters, and thus output them.
      * @param input input string to convert
      * @param outputChar single character string
      * @return String
@@ -80,5 +106,44 @@ public class TextUtilities {
             throw new IllegalArgumentException("The outputChar must be one character long");
         }
         return input.replaceAll(REGEX_ANY_CHARACTER, outputChar);
+    }
+
+    /**
+     * Helper method to get plurals and non-plurals right. Pass in a number with the unit, and it will return "0 days"
+     * or "1 file" or "2 warnings", avoiding the need to use "x apple(s)". This has been coded with an example of using
+     * {@link java.text.MessageFormat} and other {@link java.text.Format} classes to implement. Which are much more
+     * powerful than this.
+     * @param count the number of "items"
+     * @param descriptor the base word in singular form
+     * @return the number, with descriptor in the correct plural/non-plural form
+     */
+    public static String getNumberWithWord(long count, String descriptor) {
+        String pluralDescriptor = descriptor + "s";
+        double[] countLimits = {0, 1, 2};
+        String[] countParts = {"0 " + pluralDescriptor, "1 " + descriptor, "{0,number} " + pluralDescriptor};
+        ChoiceFormat choiceFormat = new ChoiceFormat(countLimits, countParts);
+        MessageFormat format = new MessageFormat("{0}");
+        format.setFormatByArgumentIndex(0, choiceFormat);
+        Object[] countObjectArray = {count};
+        return format.format(countObjectArray);
+    }
+
+    /**
+     * An alternative to getNumberWithWord() which is actually simpler and one assumes faster.
+     * @param count the number of "items"
+     * @param descriptor the base word in singular form
+     * @return the number, with descriptor in the correct plural/non-plural form
+     */
+    public static String getNumberWithWord_alt(long count, String descriptor) {
+        if (count == 1) {
+            return "1 " + descriptor;
+        } else {
+            return count + " " + descriptor + "s";
+        }
+        /*
+        The code above can be simplified to one line as follows:
+        return (count == 1) ? "1 " + descriptor : count + " " + descriptor + "s";
+        However I personally find the more verbose if statement easier to read.
+         */
     }
 }

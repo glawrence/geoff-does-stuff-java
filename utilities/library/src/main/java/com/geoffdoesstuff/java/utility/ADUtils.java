@@ -15,6 +15,12 @@ public class ADUtils {
     private static final ZoneId UTC_TIMEZONE = ZoneId.of("UTC");
 
     /**
+     * This is here to suppress Javadoc complaining about not commenting the default constructor
+     */
+    private ADUtils() {
+    }
+
+    /**
      * In AD a timestamp is the "number of 100 nanosecond intervals since 1st January 1601", so this conversion
      * needs a little calculation
      * @param msFileTimestamp the number of 100 nanosecond intervals

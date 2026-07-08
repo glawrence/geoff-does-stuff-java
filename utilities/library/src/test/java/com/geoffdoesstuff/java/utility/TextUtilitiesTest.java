@@ -129,4 +129,21 @@ class TextUtilitiesTest {
         assertEquals(TextUtilities.getNumberWithWord(2, "file"), TextUtilities.getNumberWithWord_alt(2, "file"));
         assertEquals(TextUtilities.getNumberWithWord(128, "file"), TextUtilities.getNumberWithWord_alt(128, "file"));
     }
+
+    @DisplayName("Test firstLineOnly")
+    @Test
+    void firstLineOnly() {
+        assertNull(TextUtilities.firstLineOnly(null));
+        assertEquals("", TextUtilities.firstLineOnly(""));
+        assertEquals(" ", TextUtilities.firstLineOnly(" "));
+        assertEquals("", TextUtilities.firstLineOnly("\n"));
+        assertEquals("", TextUtilities.firstLineOnly("\nHello"));
+        assertEquals(" ", TextUtilities.firstLineOnly(" \n \n \t "));
+        assertEquals(" \t ", TextUtilities.firstLineOnly(" \t \n \n "));
+        assertEquals("Hello World", TextUtilities.firstLineOnly("Hello World"));
+        assertEquals("Hello", TextUtilities.firstLineOnly("Hello\nMulti\nLine\nWorld"));
+        assertEquals("Hello", TextUtilities.firstLineOnly("Hello\r\nMulti\r\nLine\r\nWorld"));
+        assertEquals("Hello", TextUtilities.firstLineOnly("Hello\n"));
+        assertEquals("Hello", TextUtilities.firstLineOnly("Hello\r\n"));
+    }
 }

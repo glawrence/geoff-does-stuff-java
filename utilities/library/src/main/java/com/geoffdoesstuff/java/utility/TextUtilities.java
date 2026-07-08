@@ -146,4 +146,17 @@ public class TextUtilities {
         However I personally find the more verbose if statement easier to read.
          */
     }
+
+    /**
+     * If a String contains multiple lines of text, then return just the first line of that String.
+     * @param input a String which may or may not have multiple lines
+     * @return a String with no line endings, the first line of the input String
+     */
+    public static String firstLineOnly(String input) {
+        if (isNullOrEmpty(input)) {
+            return input;
+        } else {
+            return input.lines().findFirst().orElse("");
+        }
+    }
 }

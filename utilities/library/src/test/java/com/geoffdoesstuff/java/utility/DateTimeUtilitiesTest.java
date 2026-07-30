@@ -16,7 +16,7 @@ class DateTimeUtilitiesTest {
     private static final LocalDate YESTERDAY = TODAY.minusDays(1);
 
     @ParameterizedTest
-    @ValueSource(strings = {"21-12-2021", "2021-12-21", "21 12 2021", "21 December 2021", "21 Dec 2021", "21-Dec-2021"})
+    @ValueSource(strings = {"21-12-2021", "2021-12-21", "21 12 2021", "21 December 2021", "21 Dec 2021", "21-Dec-2021", "21-DEC-2021", "21 DECEMber 2021"})
     void parseLocalDate_success(String dateText) {
         assertEquals(LocalDate.of(2021, 12, 21), DateTimeUtilities.parseLocalDate(dateText));
     }
@@ -29,7 +29,7 @@ class DateTimeUtilitiesTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"21-12-2021", "2021-12-21", "21 12 2021", "21 December 2021", "21 Dec 2021", "21-Dec-2021"})
+    @ValueSource(strings = {"21-12-2021", "2021-12-21", "21 12 2021", "21 December 2021", "21 Dec 2021", "21-Dec-2021", "21-DEC-2021", "21 DECEMber 2021"})
     void isValidLocalDate_true(String dateText) {
         assertTrue(DateTimeUtilities.isValidLocalDate(dateText));
     }

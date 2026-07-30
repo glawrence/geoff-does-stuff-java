@@ -2,6 +2,7 @@ package com.geoffdoesstuff.java.utility;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Objects;
@@ -19,7 +20,9 @@ public class DateTimeUtilities {
     }
 
     /**
-     * Convert input text into a LocalDate object.
+     * Convert input text into a LocalDate object, such that a number of different date formats are valid, and those
+     * using letters are not case-sensitive. {@link java.time.format.DateTimeFormatterBuilder} is a powerful way to
+     * format dates and times.
      *
      * @param input the text to convert to a date
      * @return the converted text as a LocalDate
@@ -29,9 +32,9 @@ public class DateTimeUtilities {
                 DateTimeFormatter.ISO_DATE,
                 DateTimeFormatter.ofPattern("dd MM yyyy"),
                 DateTimeFormatter.ofPattern("dd-MM-yyyy"),
-                DateTimeFormatter.ofPattern("dd MMM yyyy"),
-                DateTimeFormatter.ofPattern("dd-MMM-yyyy"),
-                DateTimeFormatter.ofPattern("dd MMMM yyyy")
+                new DateTimeFormatterBuilder().parseCaseInsensitive().appendPattern("dd-MMM-yyyy").toFormatter(),
+                new DateTimeFormatterBuilder().parseCaseInsensitive().appendPattern("dd MMM yyyy").toFormatter(),
+                new DateTimeFormatterBuilder().parseCaseInsensitive().appendPattern("dd MMMM yyyy").toFormatter()
         };
         try {
             AtomicReference<LocalDate> parsedLocalDate = new AtomicReference<>();

@@ -159,4 +159,23 @@ public class TextUtilities {
             return input.lines().findFirst().orElse("");
         }
     }
+
+    /**
+     * Replace any carriage return (\r) or line feed (\n) characters with a space, noting that with Windows you will
+     * get one space character for the common carriage return, line feed pair.
+     * @param input String to process
+     * @return copy of input with no new line characters
+     */
+    public static String lineEndingsToSpace(String input) {
+        return input.replaceAll("[\\r\\n]+", " ");
+    }
+
+    /**
+     * Convert all new lines to spaces and then trim whitespace from the start and end of the input String
+     * @param input String to process
+     * @return copy of input with no new line characters and all leading and trailing whitespace removed
+     */
+    public static String trimExtra(String input) {
+        return lineEndingsToSpace(input).trim();
+    }
 }

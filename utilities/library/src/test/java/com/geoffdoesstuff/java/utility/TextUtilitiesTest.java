@@ -146,4 +146,36 @@ class TextUtilitiesTest {
         assertEquals("Hello", TextUtilities.firstLineOnly("Hello\n"));
         assertEquals("Hello", TextUtilities.firstLineOnly("Hello\r\n"));
     }
+
+    @DisplayName("Test lineEndingsToSpace")
+    @Test
+    void lineEndingsToSpace() {
+        assertEquals("   ", TextUtilities.lineEndingsToSpace(" \r "));
+        assertEquals("   ", TextUtilities.lineEndingsToSpace(" \n "));
+        assertEquals("   ", TextUtilities.lineEndingsToSpace(" \r\n "));
+        assertEquals(3, TextUtilities.lineEndingsToSpace(" \r ").length());
+        assertEquals(3, TextUtilities.lineEndingsToSpace(" \n ").length());
+        assertEquals(3, TextUtilities.lineEndingsToSpace(" \r\n ").length());
+        assertEquals("1 2 3", TextUtilities.lineEndingsToSpace("1\r2\r3"));
+        assertEquals("1 2 3", TextUtilities.lineEndingsToSpace("1\n2\n3"));
+        assertEquals("1 2 3", TextUtilities.lineEndingsToSpace("1\r\n2\r\n3"));
+        assertEquals("1 2 3 4", TextUtilities.lineEndingsToSpace("1\r2\n3\r\n4"));
+    }
+
+    @DisplayName("Test trimExtra")
+    @Test
+    void trimExtra() {
+        assertEquals("", TextUtilities.trimExtra(" \r "));
+        assertEquals("", TextUtilities.trimExtra(" \n "));
+        assertEquals("", TextUtilities.trimExtra(" \r\n "));
+        assertEquals(0, TextUtilities.trimExtra(" \r ").length());
+        assertEquals(0, TextUtilities.trimExtra(" \n ").length());
+        assertEquals(0, TextUtilities.trimExtra(" \r\n ").length());
+        assertEquals("1 2 3", TextUtilities.trimExtra("1\r2\r3"));
+        assertEquals("1 2 3", TextUtilities.trimExtra("1\n2\n3"));
+        assertEquals("1 2 3", TextUtilities.trimExtra("1\r\n2\r\n3"));
+        assertEquals("1 2 3 4", TextUtilities.trimExtra("1\r2\n3\r\n4"));
+        assertEquals("1 2  3  4", TextUtilities.trimExtra("  1\r2\n 3 \r\n4  "));
+        assertEquals("1 2 3 4", TextUtilities.trimExtra(" \t 1\r2\n3\r\n4 \t "));
+    }
 }

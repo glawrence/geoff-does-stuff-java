@@ -10,7 +10,7 @@ public class MainDemoApp {
 	private static final String DEMO_CLASSPATH = "com.geoffdoesstuff.java.demo";
 
 	/**
-	 * This is here to suppress JavaDoc complaining about not commenting the default constructor
+	 * This is here to suppress Javadoc complaining about not commenting the default constructor
 	 */
 	private MainDemoApp() {
 	}

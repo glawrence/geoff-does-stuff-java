@@ -4,6 +4,7 @@ import com.geoffdoesstuff.java.data.objects.Holiday;
 import com.geoffdoesstuff.java.data.objects.RomanNumeral;
 import com.geoffdoesstuff.java.utility.DemoUtilities;
 import com.geoffdoesstuff.java.utility.ObjectUtilities;
+import com.geoffdoesstuff.java.utility.PrimitiveUtilities;
 
 import java.util.Optional;
 
@@ -137,6 +138,26 @@ public class Logic {
 	private static void checkTheBoolean(Boolean input) {
 		System.out.println("Testing with: " + input);
 		if (Boolean.TRUE.equals(input)) { // the safe way to test
+			System.out.println(" - Input Boolean is true");
+		} else {
+			System.out.println(" - Input Boolean is false");
+		}
+		if (Boolean.FALSE.equals(input)) { // NOTE if input = null this will return false
+			System.out.println(" - Input Boolean is false");
+		} else {
+			System.out.println(" - Input Boolean is true");
+		}
+		if (PrimitiveUtilities.getAsPrimitive(input, false)) {
+			System.out.println(" - Input Boolean is true");
+		} else {
+			System.out.println(" - Input Boolean is false");
+		}
+		if (PrimitiveUtilities.getAsPrimitive(input)) {
+			System.out.println(" - Input Boolean is true");
+		} else {
+			System.out.println(" - Input Boolean is false");
+		}
+		if (PrimitiveUtilities.getAsPrimitive(input, true)) {
 			System.out.println(" - Input Boolean is true");
 		} else {
 			System.out.println(" - Input Boolean is false");

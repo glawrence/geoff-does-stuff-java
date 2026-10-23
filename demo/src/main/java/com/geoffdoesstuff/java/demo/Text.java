@@ -47,8 +47,12 @@ public class Text {
             System.out.println(item);
         }
 
+        DemoUtilities.outputTitle("Splitting Demo", true);
         textSplitting();
+        DemoUtilities.outputTitle("Joining Demo", true);
+        textJoining();
 
+        DemoUtilities.outputTitle("List Demo", true);
         listTest();
         showTextBlock();
 
@@ -211,6 +215,20 @@ public class Text {
                     .toList();
             System.out.println("  " + words);
         });
+    }
+
+    private static void textJoining() {
+        List<String> single = List.of("First");
+        List<String> pair = List.of("First", "Second");
+        List<String> multiple = List.of("First", "Second", "Third", "Forth");
+
+        System.out.println(mergeStringList(single));
+        System.out.println(mergeStringList(pair));
+        System.out.println(mergeStringList(multiple));
+    }
+
+    private static String mergeStringList(List<String> strings) {
+        return String.join("->", strings);
     }
 
     private static void listTest() {

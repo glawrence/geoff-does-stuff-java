@@ -8,6 +8,8 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Date and Time demo.
@@ -109,7 +111,8 @@ public class DatesAndTimes {
 	}
 
 	/**
-	 * The code for this seemed useful, so has been moved to the Utilities Library
+	 * Some of the code for this seemed useful, so has been moved to the Utilities Library.
+	 *
 	 */
 	private void parsingDemo() {
 		List<String> inputDateStrings = List.of("2021-12-21", "21 12 2021", "21-12-2021",
@@ -122,6 +125,23 @@ public class DatesAndTimes {
 				System.out.printf("Parsing %s into LocalDate fails, it is not a valid date%n", input);
 			}
 		});
+
+		DemoUtilities.outputTitle("Formatting for Locale", true);
+		/*
+		The interesting point here is that with the UK locale MMM gives "Sept" but in the US it gives "Sep",
+		this is a subtle point that caught me out when I first found it. Further note that ENGLISH is basically US.
+		 */
+		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+		ThreadLocalRandom random = ThreadLocalRandom.current();
+		for (Month month: Month.values()) {
+			// a random day in the month, for the year 2026
+			LocalDate exampleDate = LocalDate.of(2026, month, random.nextInt(1, 29));
+			System.out.println(month);
+			System.out.println("  UK: " + dateTimeFormatter.localizedBy(Locale.UK).format(exampleDate));
+			System.out.println("  US: " + dateTimeFormatter.localizedBy(Locale.US).format(exampleDate));
+			System.out.println("  EN: " + dateTimeFormatter.localizedBy(Locale.ENGLISH).format(exampleDate));
+			System.out.println("  CA: " + dateTimeFormatter.localizedBy(Locale.CANADA).format(exampleDate));
+		}
 	}
 
 	/**
